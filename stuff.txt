@@ -3,7 +3,7 @@ python3 -m venv .venv   py -3 -m venv .venv
 
 pip install Flask
 flask --app app run
-flask --app app --debug run
+flask --app app --debug run --port 8000
 
 
 pip freeze > requirements.txt
