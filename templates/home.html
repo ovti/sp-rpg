@@ -1,0 +1,11 @@
+{% extends "base.html" %} {% block body %}
+<h1>Enter Your Player Name</h1>
+<form method="post">
+  <label for="player_name">Player Name:</label>
+  <input type="text" id="player_name" name="player_name" required />
+  <button type="submit">Submit</button>
+</form>
+
+{% if player_name %}
+<h2>Hello, {{ player_name }}!</h2>
+{% endif %} {% endblock %}
