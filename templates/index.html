@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block body %}
+<p id="status">{{ status }}</p>
+{% if dead %}
+<p id="dead">{{ dead }}</p>
+{% else %}
+<form method="post">
+  <button type="submit">Attack</button>
+</form>
+{% endif %} {% endblock %}

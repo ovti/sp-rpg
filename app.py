@@ -1,21 +1,15 @@
-from flask import Flask, render_template, redirect, url_for, request 
-  
-app = Flask(__name__) 
-app.secret_key = "secret key"
+from flask import Flask, render_template, request, redirect, url_for
+from game import Game
 
-@app.route("/", methods =["GET", "POST"])
-def home():
-    player_name = None 
+app = Flask(__name__)
+game = Game()
+
+@app.route('/', methods=['GET', 'POST'])
+def index():
     if request.method == 'POST':
-        player_name = request.form.get('player_name')
-
-    return render_template('home.html', player_name=player_name)
-
-@app.route("/hello")
-def hello():
-    return render_template("hello.html")
-
+        game.player_attack(10)  
+        game.ai_attack(5)
+    return render_template('index.html', status=game.get_player_status(), dead=game.is_dead())
 
 if __name__ == '__main__':
-    app.run(host='wierzba.wzks.uj.edu.pl', port=5127, debug=True)
-
+    app.run(debug=True)
