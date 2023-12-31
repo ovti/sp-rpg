@@ -22,20 +22,3 @@ def index():
 
 if __name__ == '__main__':
     app.run(debug=True)
-
-
-# @app.route("/", methods =["GET", "POST"])
-# def home():
-#     player_name = None 
-#     if request.method == 'POST':
-#         player_name = request.form.get('player_name')
-#     return render_template('home.html', player_name=player_name)
-
-# @app.route("/hello")
-# def hello():
-#     return render_template("hello.html")
-
-
-# if __name__ == '__main__':
-#     app.run(host='wierzba.wzks.uj.edu.pl', port=5127, debug=True)
-
