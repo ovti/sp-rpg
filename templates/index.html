@@ -4,6 +4,8 @@
 <p id="dead">{{ dead }}</p>
 {% else %}
 <form method="post">
-  <button type="submit">Attack</button>
+  <input type="hidden" name="action" value="attack" />
+  <button type="submit" name="attack">Attack</button>
 </form>
+
 {% endif %} {% endblock %}
