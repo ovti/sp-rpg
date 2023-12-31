@@ -7,11 +7,11 @@ class Game:
         self.ai_player = Player("Kyle")
 
     def player_attack(self):
-        damage = random.randint(1, 3)
+        damage = random.randint(5, 15)
         self.ai_player.take_damage(damage)
         return damage
     def ai_attack(self):
-        damage = random.randint(1, 3)
+        damage = random.randint(5, 15)
         self.player1.take_damage(damage)
         return damage
 

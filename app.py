@@ -4,25 +4,25 @@ from game import Game
 
 app = Flask(__name__)
 app.secret_key = 'some_secret'
-game = Game()
+games = {}
 
 @app.route('/', methods=['GET', 'POST'])
 def index():
     if 'key' not in session:
         session['key'] = str(uuid.uuid4())
+    if session['key'] not in games:
+        games[session['key']] = Game()    
     
-    if 'player_hp' not in session:
-        session['player_hp'] = 100
-        
     if request.method == 'POST':
-        game.player_attack()  
-        game.ai_attack()
+        games[session['key']].player_attack()
+        games[session['key']].ai_attack()
+        return redirect(url_for('index'))  # Redirect after POST
         
-        
-    return render_template('index.html', status=game.get_player_status(), dead=game.is_dead())
+    return render_template('index.html', status=games[session['key']].get_player_status(), dead=games[session['key']].is_dead())
 
 if __name__ == '__main__':
     app.run(debug=True)
+
 
 # @app.route("/", methods =["GET", "POST"])
 # def home():
