@@ -21,4 +21,5 @@ def index():
     return render_template('index.html', status=games[session['key']].get_player_status(), dead=games[session['key']].is_dead())
 
 if __name__ == '__main__':
+    
     app.run(debug=True)
