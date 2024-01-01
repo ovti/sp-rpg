@@ -26,3 +26,6 @@ pip install -r requirements.txt
 
 # if __name__ == '__main__':
 #     app.run(host='wierzba.wzks.uj.edu.pl', port=5127, debug=True)
+
+
+wybór trybu -> kreacja postaci -> widok z traderami i arena do walk -> przyciski prowadzące do wyniku postaci, gdzie można dać level up dodać punkty do statystyk / może jakiś ekwipunek albo skille?? -> jakaś implementacja multiplayera
