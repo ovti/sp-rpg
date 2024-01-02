@@ -1,0 +1,9 @@
+{% extends "base.html" %} {% block body %}
+<h1>Welcome, {{ username }}!</h1>
+<h2>Online player List:</h2>
+<ul>
+  {% for player, stats in players.items() %}
+  <li>{{ player }} (HP: {{ stats.hp }}, Attack: {{ stats.attack }})</li>
+  {% endfor %}
+</ul>
+{% endblock %}

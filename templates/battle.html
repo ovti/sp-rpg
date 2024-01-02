@@ -1,6 +1,19 @@
 {% extends "base.html" %} {% block body %}
 <p id="status">{{ status }}</p>
-{% if dead %}
+{% if dead %}<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>RPG Game - Battle</title>
+  </head>
+  <body>
+    <h1>Battle: {{ username }} vs. {{ opponent }}</h1>
+    <p>It's {{ turn }}'s turn.</p>
+    <a href="/lobby">Return to Lobby</a>
+  </body>
+</html>
+
 <p id="dead">{{ dead }}</p>
 {% else %}
 <form method="post">
@@ -9,3 +22,31 @@
 </form>
 
 {% endif %} {% endblock %}
+<script>
+  function updatePlayerList() {
+    var playerList = document.getElementById('playerList');
+
+    // Make an AJAX request to the server to get the updated player list
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', '/get_player_list', true);
+
+    xhr.onreadystatechange = function () {
+      if (xhr.readyState === 4 && xhr.status === 200) {
+        // Update the player list on the page
+        var newPlayerList = JSON.parse(xhr.responseText);
+        playerList.innerHTML = '';
+
+        newPlayerList.forEach(function (player) {
+          var li = document.createElement('li');
+          li.textContent = player;
+          playerList.appendChild(li);
+        });
+      }
+    };
+
+    xhr.send();
+  }
+
+  // Update the player list every 5 seconds (adjust the interval as needed)
+  setInterval(updatePlayerList, 5000);
+</script>
