@@ -1,10 +1,11 @@
 class Player:
-    def __init__(self, game, username):
+    def __init__(self, game, username, user_id):
         self.game = game
         self.username = username
+        self.user_id = user_id
 
     def enter_game(self):
-        self.game.add_player(self.username)
+        self.game.add_player(self.username, self.user_id)
 
     def challenge(self, opponent):
         self.game.initiate_battle(self.username, opponent)
@@ -12,11 +13,6 @@ class Player:
     def attack(self, opponent):
         return self.game.attack(self.username, opponent)
     
-    # def __init__(self, name, hp=100):
-    #     self.name = name
-    #     self.hp = hp
+    def quitGame(self):
+        self.game.remove_player(self.user_id)
 
-    # def take_damage(self, damage):
-    #     self.hp -= damage
-    #     if self.hp < 0:
-    #         self.hp = 0
