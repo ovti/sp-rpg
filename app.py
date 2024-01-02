@@ -15,23 +15,20 @@ def index():
 @app.route('/enter_game', methods=['POST'])
 def enter_game():
     username = request.form['username']
-    
     user_id = str(uuid.uuid4())
-
     session['user_id'] = user_id
     player = Player(game, username, user_id)
     player.enter_game()
-    return redirect(url_for('lobby'))
+    return redirect(url_for('game_map'))
 
-@app.route('/game_map', methods=['POST'])
+@app.route('/game_map', methods=['POST', 'GET'])
 def game_map():
     user_id = session.get('user_id')
-    if not user_id:
+    username = game.get_username(user_id)
+    if not user_id or not username:
         return redirect(url_for('index'))
-    player = Player(game, None, user_id)
-    opponent = request.form['opponent']
-    player.challenge(opponent)
-    return redirect(url_for('lobby'))
+    
+    return render_template('game_map.html', username=username)
 
 @app.route('/lobby')
 def lobby():
@@ -39,7 +36,7 @@ def lobby():
     username = game.get_username(user_id)
     if not user_id or not username:
         return redirect(url_for('index'))
-    return render_template('lobby.html', username=game.get_username(user_id), players=game.players)
+    return render_template('lobby.html', username=username, players=game.players)
 
 @app.route('/quit_game', methods=['POST'])
 def quit_game():
