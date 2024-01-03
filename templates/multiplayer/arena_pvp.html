@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Welcome, {{ username }}!</h1>
+    <h2>Online Player List:</h2>
+    <ul>
+        {% for user_id, stats in players.items() %}
+            <li>
+                {{ stats.username }} (HP: {{ stats.hp }}, Attack: {{ stats.attack }})
+            </li>
+        {% endfor %}
+    </ul>
+{% endblock %}

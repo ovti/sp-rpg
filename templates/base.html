@@ -1,16 +1,25 @@
 <!DOCTYPE html>
 <html lang="pl">
-  <head>
-    <meta charset="UTF-8" />
+<head>
+    <meta charset="UTF-8"/>
     <title>SP-RPG</title>
     <link
-      rel="stylesheet"
-      href="{{ url_for('static', filename='css/style.css') }}"
+            rel="stylesheet"
+            href="{{ url_for('static', filename='css/style.css') }}"
     />
-  </head>
-  {% block body %}
-  <header>
-    <h1>SP-RPG</h1>
-  </header>
-  {% endblock %}
+</head>
+
+{% block body %}
+    <header>
+        <h1>SP-RPG</h1>
+        <nav>
+            <ul>
+                <li><a href="{{ url_for('game_map') }}">Game Map</a></li>
+                <li><a href="{{ url_for('quit_game') }}">Quit</a></li>
+            </ul>
+        </nav>
+    </header>
+    {% block content %}
+    {% endblock %}
+{% endblock %}
 </html>

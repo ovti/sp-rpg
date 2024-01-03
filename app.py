@@ -11,6 +11,8 @@ game = Game()
 
 @app.route('/')
 def index():
+    if session.get('user_id') and game.get_username(session.get('user_id')):
+        return redirect(url_for('game_map'))
     return render_template('index.html')
 
 
@@ -30,8 +32,7 @@ def game_map():
     username = game.get_username(user_id)
     if not user_id or not username:
         return redirect(url_for('index'))
-
-    return render_template('game_map.html', username=username)
+    return render_template('game_map.html', username=username, user_id=user_id)
 
 
 @app.route('/arena', methods=['POST', 'GET'])
@@ -43,16 +44,34 @@ def arena():
     return render_template('arena.html', username=username)
 
 
-@app.route('/lobby')
-def lobby():
+@app.route('/arena_pve', methods=['POST', 'GET'])
+def arena_pve():
     user_id = session.get('user_id')
     username = game.get_username(user_id)
     if not user_id or not username:
         return redirect(url_for('index'))
-    return render_template('lobby.html', username=username, players=game.players)
+    return render_template('index.html', username=username)
 
 
-@app.route('/quit_game', methods=['POST'])
+@app.route('/arena_pvp', methods=['POST', 'GET'])
+def arena_pvp():
+    user_id = session.get('user_id')
+    username = game.get_username(user_id)
+    if not user_id or not username:
+        return redirect(url_for('index'))
+    return render_template('multiplayer/arena_pvp.html', username=username, players=game.players)
+
+
+# @app.route('/lobby')
+# def lobby():
+#     user_id = session.get('user_id')
+#     username = game.get_username(user_id)
+#     if not user_id or not username:
+#         return redirect(url_for('index'))
+#     return render_template('multiplayer/lobby.html', username=username, players=game.players)
+
+
+@app.route('/quit_game', methods=['POST', 'GET'])
 def quit_game():
     user_id = session.get('user_id')
     if not user_id:
