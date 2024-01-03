@@ -1,24 +1,6 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Battle Result</title>
-</head>
-<body>
-<h1>Battle Result</h1>
-<p>Hello, {{ username }}!</p>
-{# h1 attacker name vs opponent name #}
-<
-
-{#{% if result == 'You won!' %}#}
-{#    <p>Congratulations! You defeated the boss!</p>#}
-{#{% elif result == 'You lost!' %}#}
-{#    <p>Oops! You were defeated by the boss.</p>#}
-{#{% else %}#}
-{#    <p>Invalid battle request.</p>#}
-{#{% endif %}#}
-{##}
-{#<a href="{{ url_for('game_map') }}">Back to Game Map</a>#}
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+    <h1> A battle between {{ player.name }} and {{ opponent.name }} </h1>
+    
+    <a href="{{ url_for('game_map') }}">Back to Game Map</a>
+{% endblock %}

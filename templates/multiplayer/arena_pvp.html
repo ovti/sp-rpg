@@ -3,10 +3,10 @@
     <h1>Arena</h1>
     <h2>Players you can fight:</h2>
     <ul>
-        {% for user_id, stats in players.items() %}
+        {% for user_id, player in players.items() %}
             {% if user_id != session['user_id'] %}
                 <li>
-                    {{ stats.username }} (HP: {{ stats.hp }}, Attack: {{ stats.attack }})
+                    {{ player.name }} (HP: {{ player.hp }}, Attack: {{ player.attack }})
                 </li>
             {% endif %}
         {% endfor %}

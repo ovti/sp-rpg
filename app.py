@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify
 import uuid
 from game import Game
 from player import Player
@@ -11,17 +11,17 @@ game = Game()
 
 @app.route('/')
 def index():
-    if session.get('user_id') and game.get_username(session.get('user_id')):
+    if session.get('user_id') and game.get_name(session.get('user_id')):
         return redirect(url_for('game_map'))
     return render_template('index.html')
 
 
 @app.route('/enter_game', methods=['POST'])
 def enter_game():
-    username = request.form['username']
+    name = request.form['name']
     user_id = str(uuid.uuid4())
     session['user_id'] = user_id
-    player = Player(game, username, user_id)
+    player = Player(game, name, user_id)
     player.enter_game()
     return redirect(url_for('game_map'))
 
@@ -29,58 +29,52 @@ def enter_game():
 @app.route('/game_map', methods=['POST', 'GET'])
 def game_map():
     user_id = session.get('user_id')
-    username = game.get_username(user_id)
-    if not user_id or not username:
+    name = game.get_name(user_id)
+    if not user_id or not name:
         return redirect(url_for('index'))
-    return render_template('game_map.html', username=username, user_id=user_id)
+    return render_template('game_map.html', name=name, user_id=user_id)
 
 
 @app.route('/arena', methods=['POST', 'GET'])
 def arena():
     user_id = session.get('user_id')
-    username = game.get_username(user_id)
-    if not user_id or not username:
+    name = game.get_name(user_id)
+    if not user_id or not name:
         return redirect(url_for('index'))
-    return render_template('arena.html', username=username)
+    return render_template('arena.html', name=name)
 
 
 @app.route('/arena_pve', methods=['POST', 'GET'])
 def arena_pve():
     user_id = session.get('user_id')
-    username = game.get_username(user_id)
-    if not user_id or not username:
+    name = game.get_name(user_id)
+    if not user_id or not name:
         return redirect(url_for('index'))
     boss = game.get_bosses()
-    return render_template('singleplayer/arena_pve.html', username=username, boss=boss)
+    return render_template('singleplayer/arena_pve.html', name=name, boss=boss)
 
 
 @app.route('/arena_pvp', methods=['POST', 'GET'])
 def arena_pvp():
     user_id = session.get('user_id')
-    username = game.get_username(user_id)
-    if not user_id or not username:
+    name = game.get_name(user_id)
+    if not user_id or not name:
         return redirect(url_for('index'))
-    return render_template('multiplayer/arena_pvp.html', username=username, players=game.players)
+    return render_template('multiplayer/arena_pvp.html', name=name, players=game.players)
 
 
 @app.route('/battle/<opponent_id>', methods=['POST', 'GET'])
 def battle(opponent_id):
     user_id = session.get('user_id')
-    username = game.get_username(user_id)
-
-    if not user_id or not username:
+    name = game.get_name(user_id)
+    if not user_id or not name:
         return redirect(url_for('index'))
 
-    return render_template('battle.html', username=username, opponent_id=opponent_id)
-
-    # result = game.start_battle(user_id, int(opponent_id))
-
-    # if result is True:
-    #     return render_template('battle.html', username=username, result='You won!')
-    # elif result is False:
-    #     return render_template('battle.html', username=username, result='You lost!')
-    # else:
-    #     return render_template('battle.html', username=username, result='Invalid battle request')
+    player = game.get_players().get(user_id)
+    opponent = game.get_bosses().get(int(opponent_id))
+    # print current player
+    # return 'player: ' + str(player) + ' opponent: ' + str(opponent)
+    return render_template('battle.html', player=player, opponent=opponent)
 
 
 @app.route('/quit_game', methods=['POST', 'GET'])
