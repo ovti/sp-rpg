@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request, session, redirect, url_for, jsonify
+from flask import Flask, render_template, request, session, redirect, url_for, jsonify, flash
 import uuid
 from game import Game
 from player import Player
@@ -86,10 +86,13 @@ def attack(opponent_id):
     player = game.get_players().get(user_id)
     opponent = game.get_bosses().get(int(opponent_id))
 
-    opponent['hp'] -= player['attack']
+    if request.method == 'POST':
+        return 'test'
 
-    if opponent['hp'] <= 0:
-        opponent['defeated'] = True
+    # opponent['hp'] -= player['attack']
+    #
+    # if opponent['hp'] <= 0:
+    #     opponent['defeated'] = True
 
     return redirect(url_for('battle', opponent_id=opponent_id))
 

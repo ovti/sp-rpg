@@ -5,9 +5,9 @@ class Game:
     def __init__(self):
         self.players = {}
         self.battles = {}
-        self.bosses = {1: {'name': 'Stan', 'hp': 100, 'attack': 10, 'defeated': False},
-                       2: {'name': 'Kyle', 'hp': 200, 'attack': 20, 'defeated': False},
-                       3: {'name': 'Cartman', 'hp': 300, 'attack': 30, 'defeated': False},
+        self.bosses = {1: {'name': 'Stan', 'hp': 100, 'attack': 10},
+                       2: {'name': 'Kyle', 'hp': 200, 'attack': 20},
+                       3: {'name': 'Cartman', 'hp': 300, 'attack': 30},
                        }
 
     def add_player(self, name, user_id):
