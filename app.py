@@ -8,9 +8,11 @@ app.config['SECRET_KEY'] = 'your_secret_key'
 
 game = Game()
 
+
 @app.route('/')
 def index():
     return render_template('index.html')
+
 
 @app.route('/enter_game', methods=['POST'])
 def enter_game():
@@ -21,14 +23,16 @@ def enter_game():
     player.enter_game()
     return redirect(url_for('game_map'))
 
+
 @app.route('/game_map', methods=['POST', 'GET'])
 def game_map():
     user_id = session.get('user_id')
     username = game.get_username(user_id)
     if not user_id or not username:
         return redirect(url_for('index'))
-    
+
     return render_template('game_map.html', username=username)
+
 
 @app.route('/arena', methods=['POST', 'GET'])
 def arena():
@@ -38,6 +42,7 @@ def arena():
         return redirect(url_for('index'))
     return render_template('arena.html', username=username)
 
+
 @app.route('/lobby')
 def lobby():
     user_id = session.get('user_id')
@@ -45,6 +50,7 @@ def lobby():
     if not user_id or not username:
         return redirect(url_for('index'))
     return render_template('lobby.html', username=username, players=game.players)
+
 
 @app.route('/quit_game', methods=['POST'])
 def quit_game():
@@ -55,6 +61,7 @@ def quit_game():
     player.quitGame()
     session.pop('user_id')
     return redirect(url_for('index'))
+
 
 if __name__ == '__main__':
     app.run(debug=True)
