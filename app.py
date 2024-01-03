@@ -30,6 +30,14 @@ def game_map():
     
     return render_template('game_map.html', username=username)
 
+@app.route('/arena', methods=['POST', 'GET'])
+def arena():
+    user_id = session.get('user_id')
+    username = game.get_username(user_id)
+    if not user_id or not username:
+        return redirect(url_for('index'))
+    return render_template('arena.html', username=username)
+
 @app.route('/lobby')
 def lobby():
     user_id = session.get('user_id')

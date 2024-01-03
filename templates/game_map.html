@@ -1,7 +1,6 @@
 {% extends "base.html" %} {% block body %}
 <h1>Welcome, {{ username }}!</h1>
-{#    button to go to arena #}
-<a href="{% url 'arena' %}">Go to Arena</a>
-{#    button to go to shop #}
-
+<a href="{{ url_for('arena') }}">
+  <button>Go to arena</button>
+</a>
 {% endblock %}

@@ -3,11 +3,14 @@
   <head>
     <meta charset="UTF-8" />
     <title>SP-RPG</title>
-    <link rel="stylesheet" href="style.css" />
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/style.css') }}"
+    />
   </head>
-  <body>
-    <header>
-      <h1>SP-RPG</h1>
-    {% block body %} {% endblock %}
-  </body>
+  {% block body %}
+  <header>
+    <h1>SP-RPG</h1>
+  </header>
+  {% endblock %}
 </html>
