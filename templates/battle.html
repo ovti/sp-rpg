@@ -1,10 +1,24 @@
-{% extends "base.html" %}
-{% block content %}
-    <h1>Battle</h1>
-    <p>Player: {{ battle.players[0]['username'] }} vs {{ battle.players[1]['name'] }}</p>
-    <p>Player HP: {{ battle.players[0]['hp'] }} | Opponent HP: {{ battle.players[1]['hp'] }}</p>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Battle Result</title>
+</head>
+<body>
+<h1>Battle Result</h1>
+<p>Hello, {{ username }}!</p>
+{# h1 attacker name vs opponent name #}
+<
 
-    <form method="POST" action="{{ url_for('battle', battle_id=battle_id) }}">
-        <input type="submit" value="Attack">
-    </form>
-{% endblock %}
+{#{% if result == 'You won!' %}#}
+{#    <p>Congratulations! You defeated the boss!</p>#}
+{#{% elif result == 'You lost!' %}#}
+{#    <p>Oops! You were defeated by the boss.</p>#}
+{#{% else %}#}
+{#    <p>Invalid battle request.</p>#}
+{#{% endif %}#}
+{##}
+{#<a href="{{ url_for('game_map') }}">Back to Game Map</a>#}
+</body>
+</html>

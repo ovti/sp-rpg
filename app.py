@@ -63,6 +63,26 @@ def arena_pvp():
     return render_template('multiplayer/arena_pvp.html', username=username, players=game.players)
 
 
+@app.route('/battle/<opponent_id>', methods=['POST', 'GET'])
+def battle(opponent_id):
+    user_id = session.get('user_id')
+    username = game.get_username(user_id)
+
+    if not user_id or not username:
+        return redirect(url_for('index'))
+
+    return render_template('battle.html', username=username, opponent_id=opponent_id)
+
+    # result = game.start_battle(user_id, int(opponent_id))
+
+    # if result is True:
+    #     return render_template('battle.html', username=username, result='You won!')
+    # elif result is False:
+    #     return render_template('battle.html', username=username, result='You lost!')
+    # else:
+    #     return render_template('battle.html', username=username, result='Invalid battle request')
+
+
 @app.route('/quit_game', methods=['POST', 'GET'])
 def quit_game():
     user_id = session.get('user_id')

@@ -4,7 +4,9 @@
     <h2>Your enemies:</h2>
     <ul>
         {% for boss_id, boss in boss.items() %}
-            <li>{{ boss['name'] }}</li>
+            <li>
+                {{ boss['name'] }} - <a href="battle/{{ boss_id }}">Fight</a>
+            </li>
         {% endfor %}
     </ul>
 {% endblock %}
