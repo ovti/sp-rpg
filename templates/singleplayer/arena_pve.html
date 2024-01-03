@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Arena</h1>
+    <h2>Your enemies:</h2>
+    <ul>
+        {% for boss_id, boss in boss.items() %}
+            <li>{{ boss['name'] }}</li>
+        {% endfor %}
+    </ul>
+{% endblock %}

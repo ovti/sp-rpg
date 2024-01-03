@@ -7,12 +7,5 @@ class Player:
     def enter_game(self):
         self.game.add_player(self.username, self.user_id)
 
-    def challenge(self, opponent):
-        self.game.initiate_battle(self.username, opponent)
-
-    def attack(self, opponent):
-        return self.game.attack(self.username, opponent)
-    
-    def quitGame(self):
+    def quit_game(self):
         self.game.remove_player(self.user_id)
-

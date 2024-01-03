@@ -50,7 +50,8 @@ def arena_pve():
     username = game.get_username(user_id)
     if not user_id or not username:
         return redirect(url_for('index'))
-    return render_template('index.html', username=username)
+    boss = game.get_bosses()
+    return render_template('singleplayer/arena_pve.html', username=username, boss=boss)
 
 
 @app.route('/arena_pvp', methods=['POST', 'GET'])
@@ -62,22 +63,13 @@ def arena_pvp():
     return render_template('multiplayer/arena_pvp.html', username=username, players=game.players)
 
 
-# @app.route('/lobby')
-# def lobby():
-#     user_id = session.get('user_id')
-#     username = game.get_username(user_id)
-#     if not user_id or not username:
-#         return redirect(url_for('index'))
-#     return render_template('multiplayer/lobby.html', username=username, players=game.players)
-
-
 @app.route('/quit_game', methods=['POST', 'GET'])
 def quit_game():
     user_id = session.get('user_id')
     if not user_id:
         return redirect(url_for('index'))
     player = Player(game, None, user_id)
-    player.quitGame()
+    player.quit_game()
     session.pop('user_id')
     return redirect(url_for('index'))
 

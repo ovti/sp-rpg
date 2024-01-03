@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block content %}
+    <h1>Battle</h1>
+    <p>Player: {{ battle.players[0]['username'] }} vs {{ battle.players[1]['name'] }}</p>
+    <p>Player HP: {{ battle.players[0]['hp'] }} | Opponent HP: {{ battle.players[1]['hp'] }}</p>
+
+    <form method="POST" action="{{ url_for('battle', battle_id=battle_id) }}">
+        <input type="submit" value="Attack">
+    </form>
+{% endblock %}
