@@ -1,3 +1,7 @@
 {% extends "base.html" %} {% block body %}
 <h1>Welcome, {{ username }}!</h1>
+{#    button to go to arena #}
+<a href="{% url 'arena' %}">Go to Arena</a>
+{#    button to go to shop #}
+
 {% endblock %}
