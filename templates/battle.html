@@ -1,6 +1,18 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1> A battle between {{ player.name }} and {{ opponent.name }} </h1>
-    
+    <ul>
+        <li>
+            {{ player.name }} (HP: {{ player.hp }}, Attack: {{ player.attack }})
+        </li>
+        <li>
+            {{ opponent.name }} (HP: {{ opponent.hp }}, Attack: {{ opponent.attack }})
+        </li>
+    </ul>
+
+    <form action="{{ url_for('attack', opponent_id=opponent_id) }}" method="post">
+        <input type="submit" value="Attack">
+    </form>
+
     <a href="{{ url_for('game_map') }}">Back to Game Map</a>
 {% endblock %}
