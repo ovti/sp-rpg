@@ -1,12 +1,14 @@
 {% extends "base.html" %}
 {% block content %}
-    <h1>Welcome, {{ username }}!</h1>
-    <h2>Online Player List:</h2>
+    <h1>Arena</h1>
+    <h2>Players you can fight:</h2>
     <ul>
         {% for user_id, stats in players.items() %}
-            <li>
-                {{ stats.username }} (HP: {{ stats.hp }}, Attack: {{ stats.attack }})
-            </li>
+            {% if user_id != session['user_id'] %}
+                <li>
+                    {{ stats.username }} (HP: {{ stats.hp }}, Attack: {{ stats.attack }})
+                </li>
+            {% endif %}
         {% endfor %}
     </ul>
 {% endblock %}
