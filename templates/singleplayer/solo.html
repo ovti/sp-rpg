@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p>Character: {{ character.name }}</p>
+    <p>Health: {{ character.health }}</p>
+    <p>Attack: {{ character.attack }}</p>
+    <p>Enemy: {{ enemy.name }}</p>
+    <p>Enemy Health: {{ enemy.health }}</p>
+    <p>Enemy Attack: {{ enemy.attack }}</p>
+    <a href="{{ url_for('fight') }}">Start Fight</a>
+{% endblock %}
+```
