@@ -1,9 +1,0 @@
-{% extends 'base.html' %}
-{% block content %}
-    <h1>Welcome to the RPG Game</h1>
-    <form action="/enter_game" method="post">
-        <label for="name">Enter Your Name:</label>
-        <input type="text" id="name" name="name" required/>
-        <button type="submit">Enter Game</button>
-    </form>
-{% endblock %}
