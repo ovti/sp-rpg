@@ -76,22 +76,6 @@ def battle(opponent_id):
     return render_template('battle.html', player=player, opponent=opponent, opponent_id=opponent_id)
 
 
-@app.route('/attack/<opponent_id>', methods=['POST', 'GET'])
-def attack(opponent_id):
-    user_id = session.get('user_id')
-    name = game.get_name(user_id)
-    if not user_id or not name:
-        return redirect(url_for('index'))
-
-    player = game.get_players().get(user_id)
-    opponent = game.get_bosses().get(int(opponent_id))
-
-    if request.method == 'POST':
-        opponent['hp'] -= player['attack']
-
-    return redirect(url_for('battle', opponent_id=opponent_id))
-
-
 @app.route('/quit_game', methods=['POST', 'GET'])
 def quit_game():
     user_id = session.get('user_id')
