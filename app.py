@@ -87,12 +87,7 @@ def attack(opponent_id):
     opponent = game.get_bosses().get(int(opponent_id))
 
     if request.method == 'POST':
-        return 'test'
-
-    # opponent['hp'] -= player['attack']
-    #
-    # if opponent['hp'] <= 0:
-    #     opponent['defeated'] = True
+        opponent['hp'] -= player['attack']
 
     return redirect(url_for('battle', opponent_id=opponent_id))
 
