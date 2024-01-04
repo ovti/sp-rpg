@@ -41,7 +41,7 @@ def solo():
 def fight():
     if session['key'] in games:
         game = games[session['key']]
-        character = game.characters['warrior']  # Example
+        character = game.characters['fighter']  # Example
         enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
 
         result = game.fight(character, enemy)
