@@ -3,47 +3,54 @@ from player import Player
 
 class Game:
     def __init__(self):
-        self.characters = {
-            'fighter': Player('Fighter', 100, 10),
-            'mage': Player('Mage', 80, 15),
-            'thief': Player('Thief', 90, 12),
-            'priest': Player('Priest', 70, 8),
-        }
+        # self.characters = {
+        #     'fighter': Player('Fighter', 100, 10),
+        #     'mage': Player('Mage', 80, 15),
+        #     'thief': Player('Thief', 90, 12),
+        #     'priest': Player('Priest', 70, 8),
+        # }
 
         self.enemies = {
-            'butters': Player('Butters', 50, 8),
-            'stan': Player('Stan', 70, 12),
-            'kyle': Player('Kyle', 150, 20),
+            'butters': Player('Butters', 'Enemy', 50, 8),
+            'stan': Player('Stan', 'Enemy', 70, 12),
+            # 'kyle': Player('Kyle', 'Enemy', 150, 20),
         }
 
         self.levels = {
             1: {'enemy': 'butters'},
-            2: {'enemy': 'stan'},
-            3: {'enemy': 'kyle'},
+            # 2: {'enemy': 'stan'},
+            # 3: {'enemy': 'kyle'},
         }
 
         self.current_level = 1
 
-    def select_character(self, character):
-        if character in self.characters:
-            return True
-        else:
-            return False
+    # def select_character(self, character):
+    #     if character in self.characters:
+    #         return True
+    #     else:
+    #         return False
+
+    def create_player(self, name, character):
+        if character == 'fighter':
+            return Player(name, 'Fighter', 100, 10)
+        elif character == 'mage':
+            return Player(name, 'Mage', 80, 15)
+        elif character == 'thief':
+            return Player(name, 'Thief', 90, 12)
 
     def start_solo(self):
-        character = self.characters['fighter']
         enemy = self.enemies.get(self.levels[self.current_level]['enemy'])
-        return character, enemy, self.current_level
+        return enemy, self.current_level
 
-    def fight(self, character, enemy):
-        character.take_damage(enemy.attack)
-        enemy.take_damage(character.attack)
+    def fight(self, player, enemy):
+        player.take_damage(enemy.attack)
+        enemy.take_damage(player.attack)
 
-        if not character.is_alive():
+        if not player.is_alive():
             pass
         if not enemy.is_alive():
             pass
-        return character, enemy
+        return player, enemy
 
     def next_level(self):
         self.current_level += 1

@@ -17,3 +17,30 @@ wybór trybu (singleplayer, multiplayer, hotseat) -> wybór postaci -> kolejne w
 
 
 wybór trybu -> kreacja postaci -> widok z traderami i arena do walk -> przyciski prowadzące do wyniku postaci, gdzie można dać level up dodać punkty do statystyk / może jakiś ekwipunek albo skille?? -> jakaś implementacja multiplayera
+
+@app.route('/fight')
+def fight():
+    if session['key'] in games:
+        game = games[session['key']]
+        character = game.characters['fighter']  # Example
+        enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
+
+        result = game.fight(character, enemy)
+
+        if isinstance(result, tuple):
+            character, enemy = result
+            return render_template('singleplayer/fight.html', character=character, enemy=enemy)
+        else:
+            return result
+    else:
+        return redirect(url_for('index'))
+
+
+    if session['key'] in games:
+        game = games[session['key']]
+        if game.next_level():
+            return redirect(url_for('solo'))
+        else:
+            return "Congratulations! You completed all levels."
+    else:
+        return redirect(url_for('index'))
