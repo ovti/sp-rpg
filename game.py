@@ -13,13 +13,13 @@ class Game:
         self.enemies = {
             'butters': Player('Butters', 'Enemy', 50, 8),
             'stan': Player('Stan', 'Enemy', 70, 12),
-            # 'kyle': Player('Kyle', 'Enemy', 150, 20),
+            'kyle': Player('Kyle', 'Enemy', 150, 20),
         }
 
         self.levels = {
             1: {'enemy': 'butters'},
-            # 2: {'enemy': 'stan'},
-            # 3: {'enemy': 'kyle'},
+            2: {'enemy': 'stan'},
+            3: {'enemy': 'kyle'},
         }
 
         self.current_level = 1
@@ -45,6 +45,11 @@ class Game:
     def fight(self, player, enemy):
         player.take_damage(enemy.attack)
         enemy.take_damage(player.attack)
+
+        if player.health < 50:
+            # print ('test')
+            player.use_potion('health')
+            print('used health potion')
 
         if not player.is_alive():
             pass
