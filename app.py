@@ -37,7 +37,7 @@ def singleplayer_start():
         else:
             return redirect(url_for('index'))
 
-    return redirect(url_for('solo'))
+    return redirect(url_for('singleplayer'))
 
 
 @app.route('/fight')
@@ -71,12 +71,13 @@ def between_levels():
         if request.method == 'POST':
             stat = request.form['stat']
             game.player.level_up(stat)
+            return redirect(url_for('next_level'))
         return render_template('singleplayer/between_levels.html')
     else:
         return redirect(url_for('index'))
 
 
-@app.route('/next_level')
+@app.route('/next_level', methods=['POST', 'GET'])
 def next_level():
     if session['key'] in games:
         game = games[session['key']]
