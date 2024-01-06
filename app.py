@@ -51,7 +51,27 @@ def fight():
             player, enemy = game.fight(player, enemy)
             return render_template('singleplayer/solo.html', player=player, enemy=enemy, level=game.current_level)
         else:
-            return redirect(url_for('next_level'))
+            return redirect(url_for('between_levels'))
+    else:
+        return redirect(url_for('index'))
+
+    #     if player.is_alive() and enemy.is_alive():
+    #         player, enemy = game.fight(player, enemy)
+    #         return render_template('singleplayer/solo.html', player=player, enemy=enemy, level=game.current_level)
+    #     else:
+    #         return redirect(url_for('next_level'))
+    # else:
+    #     return redirect(url_for('index'))
+
+
+@app.route('/between_levels', methods=['POST', 'GET'])
+def between_levels():
+    if session['key'] in games:
+        game = games[session['key']]
+        if request.method == 'POST':
+            stat = request.form['stat']
+            game.player.level_up(stat)
+        return render_template('singleplayer/between_levels.html')
     else:
         return redirect(url_for('index'))
 

@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Ukończono poziom! Wybierz statystykę do rozwoju.) </h1>
+    <form action="{{ url_for('between_levels') }}" method="post">
+        <input type="radio" name="stat" value="health">HP<br>
+        <input type="radio" name="stat" value="attack">Atak<br>
+        <input type="submit" value="Submit">
+    </form>
+{% endblock %}
