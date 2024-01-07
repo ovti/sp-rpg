@@ -17,6 +17,7 @@ class Game:
         }
 
         self.current_level = 1
+        self.current_player = None
 
     def create_player(self, name, character):
         if character == 'fighter':
@@ -31,15 +32,19 @@ class Game:
         return enemy, self.current_level
 
     def fight(self, player, enemy):
-        player.take_damage(enemy.attack)
-        enemy.take_damage(player.attack)
+        if player.is_alive() and enemy.is_alive():
+            player.take_damage(enemy.attack)
+            enemy.take_damage(player.attack)
+            return player, enemy
 
-        if not player.is_alive():
-            pass
-        if not enemy.is_alive():
-            pass
+    def turn(self, player, enemy):
+        if player.is_alive() and enemy.is_alive():
+            player.take_damage(enemy.attack)
+            enemy.take_damage(player.attack)
+            return player, enemy
 
-        return player, enemy
+    def is_last_level(self):
+        return self.current_level == len(self.levels)
 
     def next_level(self):
         self.current_level += 1

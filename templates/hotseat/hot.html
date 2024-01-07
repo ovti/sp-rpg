@@ -1,0 +1,12 @@
+{% extends 'base.html' %}
+{% block content %}
+    <p> {{ player1.name }} and {{ player2.name }} </p>
+    {% if turn %}
+        <p> {{ player1.name }}'s turn </p>
+    {% else %}
+        <p> {{ player2.name }}'s turn </p>
+        
+    {% endif %}
+
+{% endblock %}
+```

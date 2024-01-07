@@ -1,0 +1,31 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Stwórz postacie:</h1>
+    <form action="{{ url_for('hotseat_start') }}" method="post">
+        <!-- Gracz 1 -->
+        <h2>Gracz 1:</h2>
+        <label for="name1">Imię:</label>
+        <input type="text" name="name1" id="name1" required>
+
+        <label for="character1">Wybierz klasę postaci!</label>
+        <select name="character1" id="character1">
+            <option value="fighter">Fighter</option>
+            <option value="mage">Mage</option>
+            <option value="thief">Thief</option>
+        </select>
+
+        <!-- Gracz 2 -->
+        <h2>Gracz 2:</h2>
+        <label for="name2">Imię:</label>
+        <input type="text" name="name2" id="name2" required>
+
+        <label for="character2">Wybierz klasę postaci!</label>
+        <select name="character2" id="character2">
+            <option value="fighter">Fighter</option>
+            <option value="mage">Mage</option>
+            <option value="thief">Thief</option>
+        </select>
+
+        <input type="submit" value="Stwórz">
+    </form>
+{% endblock %}
