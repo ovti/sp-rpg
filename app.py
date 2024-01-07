@@ -17,6 +17,11 @@ def index():
 
 @app.route('/singleplayer')
 def singleplayer():
+    if session['key'] in games:
+        game = games[session['key']]
+        return render_template('singleplayer/solo.html', player=game.player,
+                               enemy=game.enemies.get(game.levels[game.current_level]['enemy']),
+                               level=game.current_level)
     return render_template('singleplayer/singleplayer.html')
 
 
@@ -32,8 +37,6 @@ def singleplayer_start():
             game.player = game.create_player(name, character)
             enemy, level = game.start_solo()
             return render_template('singleplayer/solo.html', player=game.player, enemy=enemy, level=level)
-            # return 'Name: {}<br>Character: {}<br>Enemy: {}<br>Level: {}'.format(name, character, enemy.name, level)
-            # return redirect(url_for('solo'))
         else:
             return redirect(url_for('index'))
 
@@ -50,18 +53,12 @@ def fight():
         if player.is_alive() and enemy.is_alive():
             player, enemy = game.fight(player, enemy)
             return render_template('singleplayer/solo.html', player=player, enemy=enemy, level=game.current_level)
-        else:
+        elif not player.is_alive():
+            return redirect(url_for('game_over', result='lost'))
+        elif not enemy.is_alive():
             return redirect(url_for('between_levels'))
     else:
         return redirect(url_for('index'))
-
-    #     if player.is_alive() and enemy.is_alive():
-    #         player, enemy = game.fight(player, enemy)
-    #         return render_template('singleplayer/solo.html', player=player, enemy=enemy, level=game.current_level)
-    #     else:
-    #         return redirect(url_for('next_level'))
-    # else:
-    #     return redirect(url_for('index'))
 
 
 @app.route('/between_levels', methods=['POST', 'GET'])
@@ -82,12 +79,21 @@ def next_level():
     if session['key'] in games:
         game = games[session['key']]
         game.next_level()
-
         if game.current_level <= len(game.levels):
             enemy, level = game.start_solo()
             return render_template('singleplayer/solo.html', player=game.player, enemy=enemy, level=level)
         else:
             return 'You won!'
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/game_over/<result>')
+def game_over(result):
+    if session['key'] in games:
+        game = games[session['key']]
+        del games[session['key']]
+        return render_template('game_over.html', result=result)
     else:
         return redirect(url_for('index'))
 

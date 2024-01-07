@@ -1,0 +1,11 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    {% if result  == 'win' %}
+        Gratulacje, wygrałeś!
+    {% else %}
+        Niestety, przegrałeś.
+    {% endif %}
+    {#    start over#}
+    <a href="{{ url_for('index') }}">Zagraj ponownie</a>
+{% endblock %}
