@@ -18,6 +18,10 @@ class Game:
 
         self.current_level = 1
         self.current_player = None
+        self.player1 = None
+        self.player2 = None
+
+        self.is_hotseat = False
 
     def create_player(self, name, character):
         if character == 'fighter':
@@ -27,20 +31,27 @@ class Game:
         elif character == 'thief':
             return Player(name, 'Thief', 90, 12)
 
-    def start_solo(self):
+    def get_info(self):
         enemy = self.enemies.get(self.levels[self.current_level]['enemy'])
         return enemy, self.current_level
 
-    def fight(self, player, enemy):
-        if player.is_alive() and enemy.is_alive():
-            player.take_damage(enemy.attack)
-            enemy.take_damage(player.attack)
-            return player, enemy
+    # def start_hotseat(self):
+    #     self.current_player = self.player1
+    #     return self.current_player
 
-    def turn(self, player, enemy):
+    def switch_player(self):
+        if self.current_player == self.player1:
+            self.current_player = self.player2
+        else:
+            self.current_player = self.player1
+        return self.current_player
+
+    def fight(self, player, enemy, is_hotseat=False):
         if player.is_alive() and enemy.is_alive():
-            player.take_damage(enemy.attack)
             enemy.take_damage(player.attack)
+            player.take_damage(enemy.attack)
+            if is_hotseat:
+                self.switch_player()
             return player, enemy
 
     def is_last_level(self):

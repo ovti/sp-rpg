@@ -1,11 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p> {{ player1.name }} and {{ player2.name }} </p>
-    {% if turn %}
-        <p> {{ player1.name }}'s turn </p>
+    <p> {{ player1.name }} i {{ player2.name }} </p>
+    <p>Enemy: {{ enemy.name }}</p>
+    <p>Enemy Health: {{ enemy.health }}</p>
+    <p>Enemy Attack: {{ enemy.attack }}</p>
+    {% if current_player == player1 %}
+        <p> Tura {{ player1.name }} </p>
+        <a href="{{ url_for('hotseat_fight') }}"> {{ player1.name }} Attack </a>
     {% else %}
-        <p> {{ player2.name }}'s turn </p>
-        
+        <p> Tura {{ player2.name }}'s turn </p>
+        <a href="{{ url_for('hotseat_fight') }}"> {{ player2.name }} Attack </a>
     {% endif %}
 
 {% endblock %}
