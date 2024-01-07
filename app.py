@@ -60,7 +60,7 @@ def fight():
                 return redirect(url_for('game_over', result='lost'))
             elif not enemy.is_alive():
                 return redirect(url_for('between_levels'))
-            return render_template('singleplayer/solo.html', player=player, enemy=enemy, level=game.current_level)
+            return redirect(url_for('singleplayer'))
     else:
         return redirect(url_for('index'))
 
@@ -87,7 +87,7 @@ def next_level():
         game.next_level()
         if game.current_level <= len(game.levels):
             enemy, level = game.get_info()
-            return render_template('singleplayer/solo.html', player=game.player, enemy=enemy, level=level)
+            return redirect(url_for('singleplayer_start'))
         else:
             return 'You won!'
     else:
@@ -96,6 +96,11 @@ def next_level():
 
 @app.route('/hotseat')
 def hotseat():
+    if session['key'] in games:
+        game = games[session['key']]
+        return render_template('hotseat/hot.html', player1=game.player1, player2=game.player2,
+                               enemy=game.enemies.get(game.levels[game.current_level]['enemy']),
+                               level=game.current_level, current_player=game.current_player)
     return render_template('hotseat/hotseat.html')
 
 
@@ -137,8 +142,7 @@ def hotseat_fight():
                 return redirect(url_for('game_over', result='lost'))
             elif not enemy.is_alive():
                 return redirect(url_for('between_levels'))
-            return render_template('hotseat/hot.html', player1=player1, player2=player2, enemy=enemy,
-                                   level=game.current_level, current_player=current_player)
+            return redirect(url_for('hotseat_start'))
 
         else:
             return redirect(url_for('index'))
