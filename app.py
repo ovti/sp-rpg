@@ -211,6 +211,7 @@ def multiplayer_start():
         multiplayer_games[game_id] = Game()
         game = multiplayer_games[game_id]
         game.player1 = game.create_player(name, character)
+        game.current_player = game.player1
         session['game_id'] = game_id
         return redirect('/multiplayer_wait')
     else:
@@ -246,12 +247,108 @@ def multiplayer_wait():
         game_id = session['game_id']
         if game_id in multiplayer_games:
             game = multiplayer_games[game_id]
-
+            if game.player1 and game.player2:
+                return redirect('/multiplayer_fight')
             return render_template('multiplayer/multiplayer_wait.html', game=game)
         else:
             return redirect(url_for('index'))
     else:
         return redirect(url_for('index'))
+    # if 'game_id' in session:
+    #     game_id = session['game_id']
+    #     if game_id in multiplayer_games:
+    #         game = multiplayer_games[game_id]
+    #         if game.player1 and game.player2:
+    #             return redirect('/multiplayer_fight')
+    #         else:
+    #             return render_template('multiplayer/multiplayer_wait.html')
+    #     else:
+    #         return redirect(url_for('index'))
+    # else:
+    #     return redirect(url_for('index'))
+
+
+@app.route('/multiplayer_fight_start', methods=['POST', 'GET'])
+def multiplayer_fight_start():
+    if 'game_id' in session:
+        game_id = session['game_id']
+        if game_id in multiplayer_games:
+            game = multiplayer_games[game_id]
+            player1 = game.player1
+            player2 = game.player2
+            enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
+            current_player = game.current_player
+            # return 'enemy: ' + enemy.name + ' enemy health: ' + str(
+            #     enemy.health) + ' is enemy alive: ' + str(enemy.is_alive()) + 'current player: ' + current_player.name
+            if player1.is_alive() and player2.is_alive() and enemy.is_alive():
+                print('enemy is hit by ' + current_player.name + ' for ' + str(current_player.attack) + ' damage')
+                player, enemy = game.fight(current_player, enemy, is_not_solo=True)
+                if not player.is_alive():
+                    return redirect(url_for('game_over', result='lost'))
+                elif not enemy.is_alive():
+                    return redirect(url_for('between_levels_multiplayer'))
+                return redirect(url_for('multiplayer_fight'))
+
+            else:
+                return redirect(url_for('index'))
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/multiplayer_fight')
+def multiplayer_fight():
+    if 'game_id' in session:
+        game_id = session['game_id']
+        if game_id in multiplayer_games:
+            game = multiplayer_games[game_id]
+            player1 = game.player1
+            player2 = game.player2
+            enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
+            current_player = game.current_player
+            if player1.is_alive() and player2.is_alive() and enemy.is_alive():
+                # print('enemy is hit by ' + current_player.name + ' for ' + str(current_player.attack) + ' damage')
+                # player, enemy = game.fight(current_player, enemy, is_not_solo=True)
+                # if not player.is_alive():
+                #     return redirect(url_for('game_over', result='lost'))
+                # elif not enemy.is_alive():
+                #     return redirect(url_for('between_levels_multiplayer'))
+                return render_template('multiplayer/multiplayer_fight.html', player1=game.player1,
+                                       player2=game.player2, enemy=enemy, level=game.current_level,
+                                       current_player=game.current_player)
+
+            else:
+                return redirect(url_for('index'))
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/multiplayer_attack', methods=['POST', 'GET'])
+def multiplayer_attack():
+    if 'game_id' in session:
+        game_id = session['game_id']
+        if game_id in multiplayer_games:
+            game = multiplayer_games[game_id]
+            player1 = game.player1
+            player2 = game.player2
+            enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
+            current_player = game.current_player
+            if player1.is_alive() and player2.is_alive() and enemy.is_alive():
+                print('enemy is hit by ' + current_player.name + ' for ' + str(current_player.attack) + ' damage')
+                player, enemy = game.fight(current_player, enemy, is_not_solo=True)
+                if not player.is_alive():
+                    return redirect(url_for('game_over', result='lost'))
+                elif not enemy.is_alive():
+                    return redirect(url_for('between_levels_multiplayer'))
+                return redirect(url_for('multiplayer_fight'))
+            else:
+                return redirect(url_for('index'))
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/between_levels_multiplayer', methods=['POST', 'GET'])
+def between_levels_multiplayer():
+    return render_template('multiplayer/between_levels_multiplayer.html')
 
 
 ############### MULTIPLAYER #####################

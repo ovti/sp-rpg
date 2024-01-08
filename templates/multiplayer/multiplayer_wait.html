@@ -1,4 +1,7 @@
 {% extends 'base.html' %}
+{% block head %}
+    <meta http-equiv="refresh" content="4">
+{% endblock %}
 {% block content %}
     <h1>Rozpoczynanie rozgrywki...</h1>
     <p>{{ game.player1.name }} i {{ game.player2.name }}</p>
@@ -7,3 +10,4 @@
     <p> {{ game.player2.name }} Health: {{ game.player2.health }} </p>
     <p> {{ game.player2.name }} Attack: {{ game.player2.attack }} </p>
 {% endblock %}
+
