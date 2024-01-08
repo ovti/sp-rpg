@@ -12,7 +12,7 @@
         <p> Tura {{ player1.name }} </p>
         <a href="{{ url_for('hotseat_fight') }}"> {{ player1.name }} Attack </a>
     {% else %}
-        <p> Tura {{ player2.name }}'s turn </p>
+        <p> Tura {{ player2.name }} </p>
         <a href="{{ url_for('hotseat_fight') }}"> {{ player2.name }} Attack </a>
     {% endif %}
 

@@ -1,19 +1,16 @@
-<!-- templates/multiplayer/between_levels_multiplayer.html -->
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Between Levels - Multiplayer</title>
-</head>
-<body>
-<h1>Between Levels - Multiplayer</h1>
-<form action="{{ url_for('between_levels_multiplayer') }}" method="post">
-    <label for="player1_stat">Player 1 Stat:</label>
-    <input type="text" name="player1_stat" required>
-    <label for="player2_stat">Player 2 Stat:</label>
-    <input type="text" name="player2_stat" required>
-    <button type="submit">Continue to Next Level</button>
-</form>
-</body>
-</html>
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Ukończono poziom! Wybierz statystykę do rozwoju. </h1>
+    <form action="{{ url_for('between_levels_multiplayer') }}" method="post">
+        <p>Wybierz statystykę do rozwoju dla : {{ player1.name }}</p>
+        <input type="radio" name="player1_stat" value="health">HP<br>
+        <input type="radio" name="player1_stat" value="attack">Atak<br>
+        <p>Wybierz statystykę do rozwoju dla : {{ player2.name }}</p>
+        <input type="radio" name="player2_stat" value="health">HP<br>
+        <input type="radio" name="player2_stat" value="attack">Atak<br>
+        <input type="submit" value="Dalej">
+    </form>
+    {#    <form action="{{ url_for('next_level') }}" method="post">#}
+    {#        <input type="submit" value="Dalej">#}
+    {#    </form>#}
+{% endblock %}
