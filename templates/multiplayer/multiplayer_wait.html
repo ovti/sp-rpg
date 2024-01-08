@@ -1,0 +1,9 @@
+{% extends 'base.html' %}
+{% block content %}
+    <h1>Rozpoczynanie rozgrywki...</h1>
+    <p>{{ game.player1.name }} i {{ game.player2.name }}</p>
+    <p> {{ game.player1.name }} Health: {{ game.player1.health }} </p>
+    <p> {{ game.player1.name }} Attack: {{ game.player1.attack }} </p>
+    <p> {{ game.player2.name }} Health: {{ game.player2.health }} </p>
+    <p> {{ game.player2.name }} Attack: {{ game.player2.attack }} </p>
+{% endblock %}

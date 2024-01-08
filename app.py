@@ -1,12 +1,15 @@
 from flask import Flask, render_template, request, session, redirect, url_for
 import uuid
+import itertools
 from game import Game
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
+SESSION_TYPE = 'redis'
 
 games = {}
 multiplayer_games = {}
+multiplayer_games_id = itertools.count()
 
 
 @app.route('/')
@@ -26,8 +29,6 @@ def index():
 def singleplayer():
     if session['key'] in games:
         game = games[session['key']]
-        # set multiplayer to true
-        game.multiplayer = True
         return render_template('singleplayer/solo.html', player=game.player,
                                enemy=game.enemies.get(game.levels[game.current_level]['enemy']),
                                level=game.current_level)
@@ -193,7 +194,64 @@ def next_level_hotseat():
 ############### MULTIPLAYER #####################
 @app.route('/multiplayer')
 def multiplayer():
-    return render_template('multiplayer/multiplayer.html', games=games)
+    return render_template('multiplayer/multiplayer.html', multiplayer_games=multiplayer_games)
+
+
+@app.route('/multiplayer_new')
+def multiplayer_new():
+    return render_template('multiplayer/multiplayer_new.html')
+
+
+@app.route('/multiplayer_start', methods=['POST'])
+def multiplayer_start():
+    name = request.form['name']
+    character = request.form['character']
+    if name and character:
+        game_id = next(multiplayer_games_id)
+        multiplayer_games[game_id] = Game()
+        game = multiplayer_games[game_id]
+        game.player1 = game.create_player(name, character)
+        session['game_id'] = game_id
+        return redirect('/multiplayer_wait')
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/multiplayer_join/', methods=['POST', 'GET'])
+def multiplayer_join():
+    if request.method == 'POST':
+        game_id = request.form['game_id']
+        game_id = int(game_id)
+        if game_id in multiplayer_games:
+            game = multiplayer_games[game_id]
+            name = request.form['name']
+            character = request.form['character']
+            if name and character:
+                game.player2 = game.create_player(name, character)
+                session['game_id'] = game_id
+                return redirect('/multiplayer_wait')
+            else:
+                return redirect(url_for('index'))
+        else:
+            return redirect(url_for('index'))
+    else:
+        if request.method == 'GET':
+            game_id = request.args.get('game')
+            return render_template('multiplayer/multiplayer_join.html', game_id=game_id)
+
+
+@app.route('/multiplayer_wait', methods=['POST', 'GET'])
+def multiplayer_wait():
+    if 'game_id' in session:
+        game_id = session['game_id']
+        if game_id in multiplayer_games:
+            game = multiplayer_games[game_id]
+
+            return render_template('multiplayer/multiplayer_wait.html', game=game)
+        else:
+            return redirect(url_for('index'))
+    else:
+        return redirect(url_for('index'))
 
 
 ############### MULTIPLAYER #####################

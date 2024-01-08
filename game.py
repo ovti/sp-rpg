@@ -16,14 +16,11 @@ class Game:
             3: {'enemy': 'kyle'},
         }
 
-        self.lobbies = {}
-
         self.current_level = 1
         self.current_player = None
         self.player1 = None
         self.player2 = None
 
-        self.multiplayer = False
         self.is_not_solo = False
 
     def create_player(self, name, character):
@@ -56,9 +53,6 @@ class Game:
     def is_last_level(self):
         return self.current_level == len(self.levels)
 
-    def is_multiplayer(self):
-        return self.multiplayer
-
     def next_level(self):
         self.current_level += 1
 
@@ -66,23 +60,3 @@ class Game:
             return True
         else:
             return False
-
-    # def create_lobby(self, lobby_name):
-    #     self.lobbies[lobby_name] = {'player1': None, 'player2': None}
-    #
-    # def join_lobby(self, lobby_name):
-    #     if lobby_name in self.lobbies and not self.lobbies[lobby_name]['player2']:
-    #         self.lobbies[lobby_name]['player2'] = 'Player 2'  # Replace this with the actual player object
-    #         return True
-    #     else:
-    #         return False
-    #
-    # def start_multiplayer(self, lobby_name):
-    #     if lobby_name in self.lobbies and self.lobbies[lobby_name]['player2']:
-    #         self.player1 = self.lobbies[lobby_name]['player1']
-    #         self.player2 = self.lobbies[lobby_name]['player2']
-    #         self.current_player = self.player1
-    #         self.is_not_solo = True
-    #         return True
-    #     else:
-    #         return False

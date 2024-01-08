@@ -1,36 +1,16 @@
 {% extends 'base.html' %}
 {% block content %}
-    {% if games|length == 0 %}
-        <p>Nie ma żadnych aktywnych gier multiplayer :(</p>
-    {% else %}
-        <p>Wybierz grę, do której chcesz dołączyć:</p>
+    {% if multiplayer_games %}
+        <h1>Multiplayer Games</h1>
         <ul>
-            {% for game in games %}
-                <li><a href="{{ url_for('index') }}">Dołącz do gry {{ game }}</a>
-                </li>
+            {% for game in multiplayer_games %}
+                <li><a href="{{ url_for('multiplayer_join', game=game) }}">{{ game }}</a></li>
             {% endfor %}
         </ul>
     {% endif %}
+    {% if not multiplayer_games %}
+        <h1>No games found</h1>
 
+    {% endif %}
+    <a href="{{ url_for('multiplayer_new') }}">New game</a>
 {% endblock %}
-
-{#{% extends "base.html" %}#}
-{#{% block title %}Multiplayer Game{% endblock %}#}
-{#{% block content %}#}
-{#    <p> {{ player1.name }} i {{ player2.name }} </p>#}
-{#    <p> {{ player1.name }} Health: {{ player1.health }} </p>#}
-{#    <p> {{ player1.name }} Attack: {{ player1.attack }} </p>#}
-{#    <p> {{ player2.name }} Health: {{ player2.health }} </p>#}
-{#    <p> {{ player2.name }} Attack: {{ player2.attack }} </p>#}
-{#    <p>Enemy: {{ enemy.name }}</p>#}
-{#    <p>Enemy Health: {{ enemy.health }}</p>#}
-{#    <p>Enemy Attack: {{ enemy.attack }}</p>#}
-{#    {% if current_player == player1 %}#}
-{#        <p> Tura {{ player1.name }} </p>#}
-{#        <a href="{{ url_for('multiplayer_fight') }}"> {{ player1.name }} Attack </a>#}
-{#    {% else %}#}
-{#        <p> Tura {{ player2.name }} </p>#}
-{#        <a href="{{ url_for('multiplayer_fight') }}"> {{ player2.name }} Attack </a>#}
-{#    {% endif %}#}
-{#{% endblock %}#}
-{#```#}
