@@ -19,6 +19,8 @@ def index():
     return render_template('index.html')
 
 
+############### SINGLEPLAYER #####################
+
 @app.route('/singleplayer')
 def singleplayer():
     if session['key'] in games:
@@ -94,6 +96,10 @@ def next_level():
         return redirect(url_for('index'))
 
 
+############### SINGLEPLAYER #####################
+
+############### HOTSEAT #####################
+
 @app.route('/hotseat')
 def hotseat():
     if session['key'] in games:
@@ -141,12 +147,45 @@ def hotseat_fight():
             if not player.is_alive():
                 return redirect(url_for('game_over', result='lost'))
             elif not enemy.is_alive():
-                return redirect(url_for('between_levels'))
+                return redirect(url_for('between_levels_hotseat'))
             return redirect(url_for('hotseat_start'))
 
         else:
             return redirect(url_for('index'))
 
+
+@app.route('/between_levels_hotseat', methods=['POST', 'GET'])
+def between_levels_hotseat():
+    if session['key'] in games:
+        game = games[session['key']]
+        if game.is_last_level():
+            return redirect(url_for('game_over', result='win'))
+        if request.method == 'POST':
+            player1_stat = request.form['player1_stat']
+            player2_stat = request.form['player2_stat']
+            game.player1.level_up(player1_stat)
+            game.player2.level_up(player2_stat)
+            return redirect(url_for('next_level_hotseat'))
+        return render_template('hotseat/between_levels_hotseat.html', player1=game.player1, player2=game.player2)
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/next_level_hotseat', methods=['POST', 'GET'])
+def next_level_hotseat():
+    if session['key'] in games:
+        game = games[session['key']]
+        game.next_level()
+        if game.current_level <= len(game.levels):
+            enemy, level = game.get_info()
+            return redirect(url_for('hotseat_start'))
+        else:
+            return 'You won!'
+    else:
+        return redirect(url_for('index'))
+
+
+############### HOTSEAT #####################
 
 @app.route('/game_over/<result>')
 def game_over(result):

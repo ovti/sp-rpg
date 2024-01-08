@@ -35,10 +35,6 @@ class Game:
         enemy = self.enemies.get(self.levels[self.current_level]['enemy'])
         return enemy, self.current_level
 
-    # def start_hotseat(self):
-    #     self.current_player = self.player1
-    #     return self.current_player
-
     def switch_player(self):
         if self.current_player == self.player1:
             self.current_player = self.player2
