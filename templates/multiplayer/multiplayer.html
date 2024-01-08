@@ -1,0 +1,16 @@
+<!-- templates/multiplayer/multiplayer.html -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Multiplayer Game</title>
+</head>
+<body>
+<h1>Multiplayer Game</h1>
+<p>Player 1: {{ player1.name }} ({{ player1.character }})</p>
+<p>Player 2: {{ player2.name }} ({{ player2.character }})</p>
+<p>Enemy: {{ enemy.name }} (Level {{ level }})</p>
+<a href="{{ url_for('multiplayer_fight') }}">Start Fight</a>
+</body>
+</html>

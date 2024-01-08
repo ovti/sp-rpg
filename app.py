@@ -6,6 +6,7 @@ app = Flask(__name__)
 app.config['SECRET_KEY'] = 'secret-key'
 
 games = {}
+matchmaking_queue = []
 
 
 @app.route('/')
@@ -186,6 +187,99 @@ def next_level_hotseat():
 
 
 ############### HOTSEAT #####################
+
+############### MULTIPLAYER #####################
+
+@app.route('/multiplayer')
+def multiplayer():
+    return render_template('multiplayer/matchmaking.html')
+
+
+# Existing code (unchanged)
+
+@app.route('/join_matchmaking', methods=['POST'])
+def join_matchmaking():
+    name = request.form['name']
+    character = request.form['character']
+
+    if name and character:
+        game = games[session['key']] if session['key'] in games else Game()
+        player = game.create_player(name, character)
+
+        # Check if there are enough players to start a game
+        if len(matchmaking_queue) == 2:
+            game.player1 = matchmaking_queue.pop(0)
+            game.player2 = player
+            game.current_player = game.player1
+            games[session['key']] = game
+
+            enemy, level = game.get_info()
+            return render_template('multiplayer/multiplayer.html', player1=game.player1, player2=game.player2,
+                                   enemy=enemy, level=level)
+        else:
+            matchmaking_queue.append(player)
+            return render_template('multiplayer/waiting.html')
+    else:
+        return redirect(url_for('index'))
+
+
+# Existing code (unchanged)
+
+
+@app.route('/multiplayer_fight')
+def multiplayer_fight():
+    if session['key'] in games:
+        game = games[session['key']]
+        player1 = game.player1
+        player2 = game.player2
+        enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
+        current_player = game.current_player
+
+        if player1.is_alive() and player2.is_alive() and enemy.is_alive():
+            player, enemy = game.fight(current_player, enemy, is_hotseat=True)
+            if not player.is_alive():
+                return redirect(url_for('game_over', result='lost'))
+            elif not enemy.is_alive():
+                return redirect(url_for('between_levels_multiplayer'))
+            return redirect(url_for('multiplayer_start'))
+
+        else:
+            return redirect(url_for('index'))
+
+
+@app.route('/between_levels_multiplayer', methods=['POST', 'GET'])
+def between_levels_multiplayer():
+    if session['key'] in games:
+        game = games[session['key']]
+        if game.is_last_level():
+            return redirect(url_for('game_over', result='win'))
+        if request.method == 'POST':
+            player1_stat = request.form['player1_stat']
+            player2_stat = request.form['player2_stat']
+            game.player1.level_up(player1_stat)
+            game.player2.level_up(player2_stat)
+            return redirect(url_for('next_level_multiplayer'))
+        return render_template('multiplayer/between_levels_multiplayer.html', player1=game.player1,
+                               player2=game.player2)
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/next_level_multiplayer', methods=['POST', 'GET'])
+def next_level_multiplayer():
+    if session['key'] in games:
+        game = games[session['key']]
+        game.next_level()
+        if game.current_level <= len(game.levels):
+            enemy, level = game.get_info()
+            return redirect(url_for('multiplayer_start'))
+        else:
+            return 'You won!'
+    else:
+        return redirect(url_for('index'))
+
+
+############### MULTIPLAYER #####################
 
 @app.route('/game_over/<result>')
 def game_over(result):

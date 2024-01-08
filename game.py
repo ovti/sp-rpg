@@ -16,6 +16,8 @@ class Game:
             3: {'enemy': 'kyle'},
         }
 
+        self.lobbies = {}
+
         self.current_level = 1
         self.current_player = None
         self.player1 = None
@@ -57,6 +59,26 @@ class Game:
         self.current_level += 1
 
         if self.current_level <= len(self.levels):
+            return True
+        else:
+            return False
+
+    def create_lobby(self, lobby_name):
+        self.lobbies[lobby_name] = {'player1': None, 'player2': None}
+
+    def join_lobby(self, lobby_name):
+        if lobby_name in self.lobbies and not self.lobbies[lobby_name]['player2']:
+            self.lobbies[lobby_name]['player2'] = 'Player 2'  # Replace this with the actual player object
+            return True
+        else:
+            return False
+
+    def start_multiplayer(self, lobby_name):
+        if lobby_name in self.lobbies and self.lobbies[lobby_name]['player2']:
+            self.player1 = self.lobbies[lobby_name]['player1']
+            self.player2 = self.lobbies[lobby_name]['player2']
+            self.current_player = self.player1
+            self.is_hotseat = True
             return True
         else:
             return False

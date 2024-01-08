@@ -1,0 +1,8 @@
+{% extends 'base.html' %}
+
+{% block content %}
+    <h1>Lobby: {{ lobby_name }}</h1>
+    <p>Player 1: {{ lobby['player1'] }}</p>
+    <p>Player 2: {{ lobby['player2'] }}</p>
+    <p>Invite your friend to join!</p>
+{% endblock %}
