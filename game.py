@@ -50,6 +50,14 @@ class Game:
                 self.switch_player()
             return player, enemy
 
+    # pvp fight in multiplayer mode
+    def pvp_fight(self, attacker, opponent):
+        if attacker.is_alive() and opponent.is_alive():
+            opponent.take_damage(attacker.attack)
+            print('{} attacked {} for {} damage'.format(attacker.name, opponent.name, attacker.attack))
+            self.switch_player()
+            return attacker, opponent
+
     def is_last_level(self):
         return self.current_level == len(self.levels)
 

@@ -293,6 +293,9 @@ def multiplayer_fight_start():
             #     enemy.health) + ' is enemy alive: ' + str(enemy.is_alive()) + 'current player: ' + current_player.name
             if player1.is_alive() and player2.is_alive() and enemy.is_alive():
                 print('enemy is hit by ' + current_player.name + ' for ' + str(current_player.attack) + ' damage')
+                # game.fight_multiplayer
+                player, enemy = game.pvp_fight(current_player, enemy)
+
                 player, enemy = game.fight(current_player, enemy, is_not_solo=True)
                 if not player.is_alive():
                     return redirect(url_for('game_over', result='lost'))
@@ -344,11 +347,14 @@ def multiplayer_attack():
             enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
             current_player = game.current_player
             if player1.is_alive() and player2.is_alive() and enemy.is_alive():
-                print('enemy is hit by ' + current_player.name + ' for ' + str(current_player.attack) + ' damage')
-                player, enemy = game.fight(current_player, enemy, is_not_solo=True)
-                if not player.is_alive():
+                # game.fight_multiplayer (player vs player)
+                attacker, opponent = game.pvp_fight(current_player, enemy)
+
+                # print('enemy is hit by ' + current_player.name + ' for ' + str(current_player.attack) + ' damage')
+                # player, enemy = game.fight(current_player, enemy, is_not_solo=True)
+                if not attacker.is_alive():
                     return redirect(url_for('game_over', result='lost'))
-                elif not enemy.is_alive():
+                elif not opponent.is_alive():
                     return redirect(url_for('between_levels_multiplayer'))
                 return redirect(url_for('multiplayer_fight'))
             else:
