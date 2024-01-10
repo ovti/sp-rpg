@@ -60,3 +60,7 @@ class Game:
             return True
         else:
             return False
+
+    def are_there_two_players(self):
+        if self.player1 and self.player2:
+            return True

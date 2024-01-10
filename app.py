@@ -213,6 +213,7 @@ def multiplayer_start():
         game.player1 = game.create_player(name, character)
         game.current_player = game.player1
         session['game_id'] = game_id
+        session['player1'] = 'player1'
         return redirect('/multiplayer_wait')
     else:
         return redirect(url_for('index'))
@@ -230,6 +231,7 @@ def multiplayer_join():
             if name and character:
                 game.player2 = game.create_player(name, character)
                 session['game_id'] = game_id
+                session['player2'] = 'player2'
                 return redirect('/multiplayer_wait')
             else:
                 return redirect(url_for('index'))
@@ -248,6 +250,7 @@ def multiplayer_wait():
         if game_id in multiplayer_games:
             game = multiplayer_games[game_id]
             if game.player1 and game.player2:
+                print(game.are_there_two_players())
                 return redirect('/multiplayer_fight')
             return render_template('multiplayer/multiplayer_wait.html', game=game)
         else:
