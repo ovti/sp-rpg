@@ -4,10 +4,7 @@
 {% endblock %}
 {% block content %}
     <h1>Rozpoczynanie rozgrywki...</h1>
-    <p>{{ game.player1.name }} i {{ game.player2.name }}</p>
-    <p> {{ game.player1.name }} Health: {{ game.player1.health }} </p>
-    <p> {{ game.player1.name }} Attack: {{ game.player1.attack }} </p>
-    <p> {{ game.player2.name }} Health: {{ game.player2.health }} </p>
-    <p> {{ game.player2.name }} Attack: {{ game.player2.attack }} </p>
+    <p> Gracz 1: {{ game.player1.name }}</p>
+    <p> Gracz 2: {% if game.player2 %}{{ game.player2.name }}{% else %}Oczekiwanie na przeciwnika...{% endif %}</p>
 {% endblock %}
 

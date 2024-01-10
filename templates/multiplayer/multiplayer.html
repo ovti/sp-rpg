@@ -1,7 +1,11 @@
 {% extends 'base.html' %}
+{% block head %}
+    <meta http-equiv="refresh" content="1">
+
+{% endblock %}
 {% block content %}
     {% if multiplayer_games %}
-        <h1>Multiplayer Games</h1>
+        <h1>Pokoje graczy:</h1>
         <ul>
             {% for game_id, game in multiplayer_games.items() %}
                 {% if not game.are_there_two_players() %}
