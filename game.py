@@ -5,7 +5,7 @@ class Game:
     def __init__(self):
 
         self.enemies = {
-            'butters': Player('Butters', 'Enemy', 500, 8),
+            'butters': Player('Butters', 'Enemy', 30, 8),
             'stan': Player('Stan', 'Enemy', 70, 12),
             'kyle': Player('Kyle', 'Enemy', 150, 20),
         }

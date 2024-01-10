@@ -20,6 +20,14 @@ def index():
         session.pop('key', None)
     if 'key' not in session:
         session['key'] = uuid.uuid4()
+    if 'game_id' in session:
+        multiplayer_games.pop(session['game_id'], None)
+        session.pop('game_id', None)
+    if 'player1' in session:
+        session.pop('player1', None)
+    if 'player2' in session:
+        session.pop('player2', None)
+
     return render_template('index.html')
 
 
@@ -351,7 +359,24 @@ def multiplayer_attack():
 
 @app.route('/between_levels_multiplayer', methods=['POST', 'GET'])
 def between_levels_multiplayer():
-    return render_template('multiplayer/between_levels_multiplayer.html')
+    if 'game_id' in session:
+        game_id = session['game_id']
+        if game_id in multiplayer_games:
+            game = multiplayer_games[game_id]
+            if game.is_last_level():
+                return redirect(url_for('game_over', result='win'))
+            if request.method == 'POST':
+                player1_stat = request.form['player1_stat']
+                player2_stat = request.form['player2_stat']
+                game.player1.level_up(player1_stat)
+                game.player2.level_up(player2_stat)
+                return redirect(url_for('next_level_multiplayer'))
+            return render_template('multiplayer/between_levels_multiplayer.html', player1=game.player1,
+                                   player2=game.player2)
+        else:
+            return redirect(url_for('index'))
+    else:
+        return redirect(url_for('index'))
 
 
 ############### MULTIPLAYER #####################
