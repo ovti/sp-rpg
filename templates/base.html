@@ -12,10 +12,16 @@
 </head>
 
 {% block body %}
-    <header class="site-header">
-        <h1><a href="{{ url_for('index') }}">SP-RPG</a></h1>
-    </header>
-    {% block content %}
-    {% endblock %}
+    <div class="content">
+        <header class="site-header">
+            <h1><a href="{{ url_for('index') }}">SP-RPG</a></h1>
+        </header>
+        <div class="main">
+            <div class="main-content">
+                {% block content %}
+                {% endblock %}
+            </div>
+        </div>
+    </div>
 {% endblock %}
 </html>

@@ -25,7 +25,7 @@ class Game:
 
     def create_player(self, name, character):
         if character == 'fighter':
-            return Player(name, 'Fighter', 15, 10)
+            return Player(name, 'Fighter', 100, 10)
         elif character == 'mage':
             return Player(name, 'Mage', 80, 15)
         elif character == 'thief':
