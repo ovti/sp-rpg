@@ -16,7 +16,23 @@ pip install -r requirements.txt
 wybór trybu (singleplayer, multiplayer, hotseat) -> wybór postaci -> kolejne walki az do smierci -> wynik postaci
 
 
-wybór trybu -> kreacja postaci -> widok z traderami i arena do walk -> przyciski prowadzące do wyniku postaci, gdzie można dać level up dodać punkty do statystyk / może jakiś ekwipunek albo skille?? -> jakaś implementacja multiplayera
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 @app.route('/fight')
 def fight():

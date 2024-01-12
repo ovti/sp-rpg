@@ -1,9 +1,10 @@
 class Player:
-    def __init__(self, name, character, health, attack):
+    def __init__(self, name, character, health, attack, gold=0):
         self.name = name
         self.character = character
         self.health = health
         self.attack = attack
+        self.gold = gold
         self.potions = {'health': 3, 'attack': 3}
 
     def take_damage(self, damage):
