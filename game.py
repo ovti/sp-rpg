@@ -5,7 +5,7 @@ class Game:
     def __init__(self):
 
         self.enemies = {
-            'kid1': Player('Kid1', 'Enemy', 10, 5),
+            'kid1': Player('Kid1', 'Enemy', 35, 5),
             'kid2': Player('Kid2', 'Enemy', 20, 6, 0, 1, 1),
             'kid3': Player('Kid3', 'Enemy', 30, 8, 0, 0, 1),
             'kid4': Player('Kid4', 'Enemy', 40, 10, 0, 1, 0),
@@ -41,14 +41,12 @@ class Game:
         self.current_player = None
         self.player1 = None
         self.player2 = None
-
         self.is_not_solo = False
-
         self.game_score = 0
 
     def create_player(self, name, character):
         if character == 'fighter':
-            return Player(name, 'Fighter', 100, 10, 15, 1, 3)  # has chance to block attack
+            return Player(name, 'Fighter', 100, 10, 15, 6, 3)  # has chance to block attack
         elif character == 'mage':
             return Player(name, 'Mage', 80, 15, 5, 1, 1)  # can cast protective spell
         elif character == 'thief':
@@ -67,13 +65,99 @@ class Game:
             self.current_player = self.player1
         return self.current_player
 
-    def fight(self, player, enemy, is_not_solo=False):
+    def enemy_move(self, enemy, player):
+        if enemy.is_alive():
+            if enemy.health < 15 and enemy.health_potions > 0:
+                self.heal(enemy)
+            else:
+                self.enemy_attack(enemy, player)
+
+    def heal(self, character):
+        if character.health_potions > 0 and character.action_points > 0:
+            character.health += 10
+            character.health_potions -= 1
+            character.action_points -= 1
+
+    def enemy_attack(self, attacker, target):
+        target.take_damage(attacker.attack)
+        attacker.action_points = 5
+
+    def perform_player_move(self, player, action):
+        moves = {
+            'attack': self.player_attack,
+            'heal': self.heal,
+        }
+
+        if action in moves:
+            return moves[action](player)
+        else:
+            print("Invalid move. Skipping turn.")
+            return None
+
+    def player_attack(self, player):
+        if player.action_points >= 4:
+            player.action_points -= 4
+            return player.attack
+        else:
+            print("Not enough action points for attack.")
+            return None
+
+    def fight(self, player, action, enemy, is_not_solo=False):
         if player.is_alive() and enemy.is_alive():
-            enemy.take_damage(player.attack)
-            player.take_damage(enemy.attack)
-            if is_not_solo:
-                self.switch_player()
-            return player, enemy
+            if action == 'pass':
+                player.action_points = 5
+                if is_not_solo:
+                    self.switch_player()
+
+            if player.action_points <= 0:
+                self.enemy_move(enemy, player)
+                player.action_points = 5
+                if is_not_solo:
+                    self.switch_player()
+            else:
+                damage_dealt = self.perform_player_move(player, action)
+                if damage_dealt is not None:
+                    enemy.take_damage(damage_dealt)
+
+                # if is_not_solo:
+                #     self.switch_player()
+
+        return player, enemy
+
+    # def enemy_move(self, enemy, player):
+    #     if enemy.is_alive():
+    #         if enemy.health < 15 and enemy.health_potions > 0:
+    #             enemy.health += 10
+    #             enemy.health_potions -= 1
+    #             enemy.action_points -= 1
+    #         else:
+    #             player.take_damage(enemy.attack)
+    #             enemy.action_points = 5
+    #
+    # def fight(self, player, action, enemy, is_not_solo=False):
+    #     if player.is_alive() and enemy.is_alive():
+    #         if player.action_points > 0:
+    #             if action == 'attack' and player.action_points >= 4:
+    #                 enemy.take_damage(player.attack)
+    #                 player.action_points -= 4
+    #             elif action == 'heal' and player.health_potions > 0 and player.action_points > 0:
+    #                 player.health += 10
+    #                 player.health_potions -= 1
+    #                 player.action_points -= 1
+    #         else:
+    #             self.enemy_move(enemy, player)
+    #             player.action_points = 5
+    #         if is_not_solo:
+    #             self.switch_player()
+    #     return player, enemy
+
+    # def fight(self, player, enemy, is_not_solo=False):
+    #     if player.is_alive() and enemy.is_alive():
+    #         enemy.take_damage(player.attack)
+    #         player.take_damage(enemy.attack)
+    #         if is_not_solo:
+    #             self.switch_player()
+    #         return player, enemy
 
     def pvp_fight(self, attacker, opponent):
         if attacker.is_alive() and opponent.is_alive():
@@ -91,3 +175,6 @@ class Game:
             return True
         else:
             return False
+
+    def are_there_two_players(self):
+        return self.player1 and self.player2

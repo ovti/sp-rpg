@@ -11,10 +11,39 @@
 
     {% if current_player == player1 and session['player1'] == 'player1' %}
         <p> Tura {{ player1.name }} </p>
-        <a href="{{ url_for('multiplayer_attack') }}"> {{ player1.name }} Attack </a>
+        <form action="{{ url_for('multiplayer_attack') }}" method="post">
+            <input type="submit" name="action" value="attack">
+            <input type="submit" name="action" value="heal">
+            <input type="submit" name="action" value="pass">
+        </form>
     {% elif current_player == player2 and session['player2'] == 'player2' %}
         <p> Tura {{ player2.name }} </p>
-        <a href="{{ url_for('multiplayer_attack') }}"> {{ player2.name }} Attack </a>
+        <form action="{{ url_for('multiplayer_attack') }}" method="post">
+            <input type="submit" name="action" value="attack">
+            <input type="submit" name="action" value="heal">
+            <input type="submit" name="action" value="pass">
+        </form>
     {% endif %}
 
 {% endblock %}
+
+{#{% extends 'base.html' %}#}
+{#{% block head %}#}
+{#    <meta http-equiv="refresh" content="1">#}
+{#{% endblock %}#}
+{#{% block content %}#}
+{#    <p> {{ player1.name }} vs {{ player2.name }} </p>#}
+{#    <p> {{ player1.name }} Health: {{ player1.health }} </p>#}
+{#    <p> {{ player1.name }} Attack: {{ player1.attack }} </p>#}
+{#    <p> {{ player2.name }} Health: {{ player2.health }} </p>#}
+{#    <p> {{ player2.name }} Attack: {{ player2.attack }} </p>#}
+{##}
+{#    {% if current_player == player1 and session['player1'] == 'player1' %}#}
+{#        <p> Tura {{ player1.name }} </p>#}
+{#        <a href="{{ url_for('multiplayer_attack') }}"> {{ player1.name }} Attack </a>#}
+{#    {% elif current_player == player2 and session['player2'] == 'player2' %}#}
+{#        <p> Tura {{ player2.name }} </p>#}
+{#        <a href="{{ url_for('multiplayer_attack') }}"> {{ player2.name }} Attack </a>#}
+{#    {% endif %}#}
+{##}
+{#{% endblock %}#}

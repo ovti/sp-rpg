@@ -3,8 +3,15 @@
     <p>Character: {{ player.name }}</p>
     <p>Health: {{ player.health }}</p>
     <p>Attack: {{ player.attack }}</p>
+    <p> Action points: {{ player.action_points }}</p>
     <p>Enemy: {{ enemy.name }}</p>
     <p>Enemy Health: {{ enemy.health }}</p>
     <p>Enemy Attack: {{ enemy.attack }}</p>
-    <a href="{{ url_for('fight') }}">Attack</a>
+    {#    <a href="{{ url_for('fight') }}">Attack</a>#}
+    {#    attack or heal in post form#}
+    <form action="{{ url_for('fight') }}" method="post">
+        <input type="submit" name="action" value="attack">
+        <input type="submit" name="action" value="heal">
+        <input type="submit" name="action" value="pass">
+    </form>
 {% endblock %}

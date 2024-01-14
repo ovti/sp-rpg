@@ -61,15 +61,18 @@ def singleplayer_start():
     return redirect(url_for('singleplayer'))
 
 
-@app.route('/fight')
+@app.route('/fight', methods=['POST', 'GET'])
 def fight():
     if session['key'] in games:
         game = games[session['key']]
         player = game.player
         enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
-
+        if request.method == 'POST':
+            action = request.form['action']
+        else:
+            action = None
         if player.is_alive() and enemy.is_alive():
-            player, enemy = game.fight(player, enemy)
+            player, enemy = game.fight(player, action, enemy)
             if not player.is_alive():
                 return redirect(url_for('game_over', result='lost'))
             elif not enemy.is_alive():
@@ -138,14 +141,16 @@ def hotseat_start():
             game.current_player = game.player1
             enemy, level = game.get_info()
             return render_template('hotseat/hot.html', player1=game.player1, player2=game.player2, enemy=enemy,
-                                   level=level)
+                                   level=level, current_player=game.current_player)
+            # return render_template('hotseat/hot.html', player1=game.player1, player2=game.player2, enemy=enemy,
+            #                        level=level)
         else:
             return redirect(url_for('index'))
 
     return redirect(url_for('hotseat'))
 
 
-@app.route('/hotseat_fight')
+@app.route('/hotseat_fight', methods=['POST', 'GET'])
 def hotseat_fight():
     if session['key'] in games:
         game = games[session['key']]
@@ -153,9 +158,12 @@ def hotseat_fight():
         player2 = game.player2
         enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
         current_player = game.current_player
-
+        if request.method == 'POST':
+            action = request.form['action']
+        else:
+            action = None
         if player1.is_alive() and player2.is_alive() and enemy.is_alive():
-            player, enemy = game.fight(current_player, enemy, is_not_solo=True)
+            player, enemy = game.fight(current_player, action, enemy, is_not_solo=True)
             if not player.is_alive():
                 return redirect(url_for('game_over', result='lost'))
             elif not enemy.is_alive():
@@ -164,6 +172,27 @@ def hotseat_fight():
 
         else:
             return redirect(url_for('index'))
+
+
+# @app.route('/hotseat_fight')
+# def hotseat_fight():
+#     if session['key'] in games:
+#         game = games[session['key']]
+#         player1 = game.player1
+#         player2 = game.player2
+#         enemy = game.enemies.get(game.levels[game.current_level]['enemy'])
+#         current_player = game.current_player
+#
+#         if player1.is_alive() and player2.is_alive() and enemy.is_alive():
+#             player, enemy = game.fight(current_player, enemy, is_not_solo=True)
+#             if not player.is_alive():
+#                 return redirect(url_for('game_over', result='lost'))
+#             elif not enemy.is_alive():
+#                 return redirect(url_for('between_levels_hotseat'))
+#             return redirect(url_for('hotseat_start'))
+#
+#         else:
+#             return redirect(url_for('index'))
 
 
 @app.route('/between_levels_hotseat', methods=['POST', 'GET'])
@@ -296,8 +325,13 @@ def multiplayer_attack():
             player1 = game.player1
             player2 = game.player2
             current_player = game.current_player
+            if request.method == 'POST':
+                action = request.form['action']
+            else:
+                action = None
             if player1.is_alive() and player2.is_alive():
-                attacker, opponent = game.pvp_fight(current_player, player2 if current_player == player1 else player1)
+                attacker, opponent = game.fight(current_player, action,
+                                                player2 if current_player == player1 else player1)
                 if not attacker.is_alive():
                     return redirect(url_for('game_over', result='lost'))
                 elif not opponent.is_alive():
@@ -307,6 +341,28 @@ def multiplayer_attack():
                 return redirect(url_for('index'))
     else:
         return redirect(url_for('index'))
+
+
+# @app.route('/multiplayer_attack', methods=['POST', 'GET'])
+# def multiplayer_attack():
+#     if 'game_id' in session:
+#         game_id = session['game_id']
+#         if game_id in multiplayer_games:
+#             game = multiplayer_games[game_id]
+#             player1 = game.player1
+#             player2 = game.player2
+#             current_player = game.current_player
+#             if player1.is_alive() and player2.is_alive():
+#                 attacker, opponent = game.pvp_fight(current_player, player2 if current_player == player1 else player1)
+#                 if not attacker.is_alive():
+#                     return redirect(url_for('game_over', result='lost'))
+#                 elif not opponent.is_alive():
+#                     return redirect(url_for('multiplayer_result'))
+#                 return redirect(url_for('multiplayer_fight'))
+#             else:
+#                 return redirect(url_for('index'))
+#     else:
+#         return redirect(url_for('index'))
 
 
 @app.route('/multiplayer_result', methods=['POST', 'GET'])
