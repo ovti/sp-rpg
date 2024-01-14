@@ -12,7 +12,6 @@ class Game:
             'kid5': Player('Kid5', 'Enemy', 50, 12, 0, 2, 1),
             'kid6': Player('Kid6', 'Enemy', 60, 14, 0, 1, 2),
             'kid7': Player('Kid7', 'Enemy', 70, 16, 0, 2, 2),
-
             'butters': Player('Butters', 'Enemy', 30, 8),
             'craig': Player('Craig', 'Enemy', 50, 10),
             'token': Player('Token', 'Enemy', 60, 12),
@@ -91,7 +90,6 @@ class Game:
         if action in moves:
             return moves[action](player)
         else:
-            print("Invalid move. Skipping turn.")
             return None
 
     def player_attack(self, player):
@@ -99,7 +97,6 @@ class Game:
             player.action_points -= 4
             return player.attack
         else:
-            print("Not enough action points for attack.")
             return None
 
     def fight(self, player, action, enemy, is_not_solo=False, is_pvp=False):
@@ -141,6 +138,19 @@ class Game:
 
         return player, enemy
 
+    def is_last_level(self):
+        return self.current_level == len(self.levels)
+
+    def next_level(self):
+        self.current_level += 1
+        if self.current_level <= len(self.levels):
+            return True
+        else:
+            return False
+
+    def are_there_two_players(self):
+        return self.player1 and self.player2
+
     # def enemy_move(self, enemy, player):
     #     if enemy.is_alive():
     #         if enemy.health < 15 and enemy.health_potions > 0:
@@ -181,17 +191,3 @@ class Game:
     #         opponent.take_damage(attacker.attack)
     #         self.switch_player()
     #         return attacker, opponent
-
-    def is_last_level(self):
-        return self.current_level == len(self.levels)
-
-    def next_level(self):
-        self.current_level += 1
-
-        if self.current_level <= len(self.levels):
-            return True
-        else:
-            return False
-
-    def are_there_two_players(self):
-        return self.player1 and self.player2

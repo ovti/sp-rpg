@@ -4,21 +4,25 @@
 
 {% endblock %}
 {% block content %}
-    {% if multiplayer_games %}
-        <h1>Pokoje graczy:</h1>
-        <ul>
-            {% for game_id, game in multiplayer_games.items() %}
-                {% if not game.are_there_two_players() %}
-                    <li>
-                        <a href="{{ url_for('multiplayer_join', game=game_id) }}">Pokój
-                            gracza {{ game.player1.name }}</a>
-                    </li>
-                {% endif %}
-            {% endfor %}
-        </ul>
-    {% endif %}
-    {% if not multiplayer_games or multiplayer_games|length == 0 %}
-        <h1>Brak gier do których możesz dołączyć</h1>
-    {% endif %}
-    <a href="{{ url_for('multiplayer_new') }}">+ Utwórz własny pokój</a>
+    <div class="join-room>">
+        {% if multiplayer_games %}
+            <h1>Pokoje graczy:</h1>
+            <ul>
+                {% for game_id, game in multiplayer_games.items() %}
+                    {% if not game.are_there_two_players() %}
+                        <li>
+                            <h3>
+                                <a href="{{ url_for('multiplayer_join', game=game_id) }}">Pokój
+                                    gracza {{ game.player1.name }}</a>
+                            </h3>
+                        </li>
+                    {% endif %}
+                {% endfor %}
+            </ul>
+        {% endif %}
+        {% if not multiplayer_games or multiplayer_games|length == 0 %}
+            <h3>Brak gier do których możesz dołączyć</h3>
+        {% endif %}
+        <h3><a href="{{ url_for('multiplayer_new') }}">+ Utwórz własny pokój</a></h3>
+    </div>
 {% endblock %}

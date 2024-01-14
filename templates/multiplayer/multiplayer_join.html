@@ -1,21 +1,24 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Stwórz postać:</h1>
-    <form action="{{ url_for('multiplayer_join') }}" method="post">
-        <h2>Gracz 2:</h2>
-        <label for="name">Imię:</label>
-        <input type="text" name="name" id="name" required>
+    <div class="character-create-form">
 
-        <label for="character">Wybierz klasę postaci!</label>
-        <select name="character" id="character">
-            <option value="fighter">Fighter</option>
-            <option value="mage">Mage</option>
-            <option value="thief">Thief</option>
-        </select>
+        <form action="{{ url_for('multiplayer_join') }}" method="post">
+            <h2>Gracz 2:</h2>
+            <label for="name">Imię:</label>
+            <input type="text" name="name" id="name" required>
 
-        Joining room {{ game_id }}:
-        <input type="hidden" name="game_id" value="{{ game_id }}">
+            <label for="character">Wybierz klasę postaci!</label>
+            <select name="character" id="character">
+                <option value="fighter">Fighter</option>
+                <option value="mage">Mage</option>
+                <option value="thief">Thief</option>
+            </select>
 
-        <input type="submit" value="Stwórz">
-    </form>
+            Joining room {{ game_id }}:
+            <input type="hidden" name="game_id" value="{{ game_id }}">
+
+            <input type="submit" value="Stwórz">
+        </form>
+    </div>
 {% endblock %}
