@@ -331,7 +331,7 @@ def multiplayer_attack():
                 action = None
             if player1.is_alive() and player2.is_alive():
                 attacker, opponent = game.fight(current_player, action,
-                                                player2 if current_player == player1 else player1)
+                                                player2 if current_player == player1 else player1, is_pvp=True)
                 if not attacker.is_alive():
                     return redirect(url_for('game_over', result='lost'))
                 elif not opponent.is_alive():

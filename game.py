@@ -102,25 +102,42 @@ class Game:
             print("Not enough action points for attack.")
             return None
 
-    def fight(self, player, action, enemy, is_not_solo=False):
-        if player.is_alive() and enemy.is_alive():
+    def fight(self, player, action, enemy, is_not_solo=False, is_pvp=False):
+        if player.is_alive() and enemy.is_alive() and not is_pvp:
             if action == 'pass':
+                self.enemy_move(enemy, player)
                 player.action_points = 5
                 if is_not_solo:
                     self.switch_player()
+
+            if player.action_points > 0:
+                damage_dealt = self.perform_player_move(player, action)
+                if damage_dealt is not None:
+                    enemy.take_damage(damage_dealt)
 
             if player.action_points <= 0:
                 self.enemy_move(enemy, player)
                 player.action_points = 5
                 if is_not_solo:
                     self.switch_player()
-            else:
+
+                # if is_not_solo:
+                #     self.switch_player()
+        elif player.is_alive() and enemy.is_alive() and is_pvp:
+            if action == 'pass':
+                player.action_points = 5
+                self.switch_player()
+
+            if player.action_points > 0:
                 damage_dealt = self.perform_player_move(player, action)
                 if damage_dealt is not None:
                     enemy.take_damage(damage_dealt)
 
-                # if is_not_solo:
-                #     self.switch_player()
+            if player.action_points <= 0:
+                player.action_points = 5
+                self.switch_player()
+
+                # self.switch_player()
 
         return player, enemy
 
@@ -159,11 +176,11 @@ class Game:
     #             self.switch_player()
     #         return player, enemy
 
-    def pvp_fight(self, attacker, opponent):
-        if attacker.is_alive() and opponent.is_alive():
-            opponent.take_damage(attacker.attack)
-            self.switch_player()
-            return attacker, opponent
+    # def pvp_fight(self, attacker, opponent):
+    #     if attacker.is_alive() and opponent.is_alive():
+    #         opponent.take_damage(attacker.attack)
+    #         self.switch_player()
+    #         return attacker, opponent
 
     def is_last_level(self):
         return self.current_level == len(self.levels)

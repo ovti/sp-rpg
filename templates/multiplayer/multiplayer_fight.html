@@ -6,8 +6,12 @@
     <p> {{ player1.name }} vs {{ player2.name }} </p>
     <p> {{ player1.name }} Health: {{ player1.health }} </p>
     <p> {{ player1.name }} Attack: {{ player1.attack }} </p>
+    <p> {{ player1.name }} Action points: {{ player1.action_points }} </p>
+
     <p> {{ player2.name }} Health: {{ player2.health }} </p>
     <p> {{ player2.name }} Attack: {{ player2.attack }} </p>
+    <p> {{ player2.name }} Action points: {{ player2.action_points }} </p>
+
 
     {% if current_player == player1 and session['player1'] == 'player1' %}
         <p> Tura {{ player1.name }} </p>
