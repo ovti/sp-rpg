@@ -5,7 +5,7 @@ class Game:
     def __init__(self):
 
         self.enemies = {
-            'kid1': Player('Kid1', 'Enemy', 35, 5),
+            'kid1': Player('Kid1', 'Enemy', 10, 5),
             'kid2': Player('Kid2', 'Enemy', 20, 6, 0, 1, 1),
             'kid3': Player('Kid3', 'Enemy', 30, 8, 0, 0, 1),
             'kid4': Player('Kid4', 'Enemy', 40, 10, 0, 1, 0),
@@ -150,6 +150,14 @@ class Game:
 
     def are_there_two_players(self):
         return self.player1 and self.player2
+
+    def vendor(self, player, action):
+        if action == 'health' and player.gold >= 10:
+            player.health_potions += 1
+            player.gold -= 10
+        elif action == 'attack' and player.gold >= 10:
+            player.attack_potions += 1
+            player.gold -= 10
 
     # def enemy_move(self, enemy, player):
     #     if enemy.is_alive():

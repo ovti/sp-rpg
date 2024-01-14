@@ -6,6 +6,17 @@
         <input type="radio" name="stat" value="attack">Atak<br>
         <input type="submit" value="Dalej">
     </form>
+
+    <h1>Zakup przedmioty! </h1>
+    <p>Twoje złoto: {{ player.gold }}</p>
+    <p>Twoje mikstury zdrowia: {{ player.health_potions }}</p>
+    <p>Twoje mikstury ataku: {{ player.attack_potions }}</p>
+
+    <form action="{{ url_for('vendor') }}" method="post">
+        <input type="submit" name="action" value="attack">
+        <input type="submit" name="action" value="health">
+    </form>
+
     {#    <form action="{{ url_for('next_level') }}" method="post">#}
     {#        <input type="submit" value="Dalej">#}
     {#    </form>#}

@@ -82,6 +82,21 @@ def fight():
         return redirect(url_for('index'))
 
 
+@app.route('/vendor', methods=['POST', 'GET'])
+def vendor():
+    if session['key'] in games:
+        game = games[session['key']]
+        player = game.player
+        if request.method == 'POST':
+            action = request.form['action']
+        else:
+            action = None
+        game.vendor(player, action)
+        return render_template('singleplayer/between_levels.html', player=game.player)
+    else:
+        return redirect(url_for('index'))
+
+
 @app.route('/between_levels', methods=['POST', 'GET'])
 def between_levels():
     if session['key'] in games:
@@ -92,7 +107,7 @@ def between_levels():
             stat = request.form['stat']
             game.player.level_up(stat)
             return redirect(url_for('next_level'))
-        return render_template('singleplayer/between_levels.html')
+        return render_template('singleplayer/between_levels.html', player=game.player)
     else:
         return redirect(url_for('index'))
 
