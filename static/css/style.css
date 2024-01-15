@@ -210,3 +210,98 @@ a:hover {
     color: #fff;
 }
 
+.battle-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.battle-options h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.battle-options form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
+    margin: 1rem;
+}
+
+.battle-options input[type="submit"] {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: #fff;
+    cursor: pointer;
+}
+
+.battle-options input[type="submit"]:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffd700;
+}
+
+.between-levels-forms {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.between-levels-forms h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.between-levels-forms form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin: 1rem;
+}
+
+.between-levels-forms input[type="submit"] {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: #fff;
+    cursor: pointer;
+}
+
+/*for radio type*/
+
+.between-levels-forms input[type="radio"] {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: #fff;
+    cursor: pointer;
+}
+
+.between-levels-forms input[type="radio"]:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffd700;
+}
+
+.between-levels-forms input[type="radio"]:active {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffd700;
+}

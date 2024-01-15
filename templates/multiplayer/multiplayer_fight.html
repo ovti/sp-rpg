@@ -12,22 +12,23 @@
     <p> {{ player2.name }} Attack: {{ player2.attack }} </p>
     <p> {{ player2.name }} Action points: {{ player2.action_points }} </p>
 
-
-    {% if current_player == player1 and session['player1'] == 'player1' %}
-        <p> Tura {{ player1.name }} </p>
-        <form action="{{ url_for('multiplayer_attack') }}" method="post">
-            <input type="submit" name="action" value="attack">
-            <input type="submit" name="action" value="heal">
-            <input type="submit" name="action" value="pass">
-        </form>
-    {% elif current_player == player2 and session['player2'] == 'player2' %}
-        <p> Tura {{ player2.name }} </p>
-        <form action="{{ url_for('multiplayer_attack') }}" method="post">
-            <input type="submit" name="action" value="attack">
-            <input type="submit" name="action" value="heal">
-            <input type="submit" name="action" value="pass">
-        </form>
-    {% endif %}
+    <div class="battle-options">
+        {% if current_player == player1 and session['player1'] == 'player1' %}
+            <p> Tura {{ player1.name }} </p>
+            <form action="{{ url_for('multiplayer_attack') }}" method="post">
+                <input type="submit" name="action" value="attack">
+                <input type="submit" name="action" value="heal">
+                <input type="submit" name="action" value="pass">
+            </form>
+        {% elif current_player == player2 and session['player2'] == 'player2' %}
+            <p> Tura {{ player2.name }} </p>
+            <form action="{{ url_for('multiplayer_attack') }}" method="post">
+                <input type="submit" name="action" value="attack">
+                <input type="submit" name="action" value="heal">
+                <input type="submit" name="action" value="pass">
+            </form>
+        {% endif %}
+    </div>
 
 {% endblock %}
 

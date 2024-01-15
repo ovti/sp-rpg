@@ -11,21 +11,24 @@
     <p>Enemy: {{ enemy.name }}</p>
     <p>Enemy Health: {{ enemy.health }}</p>
     <p>Enemy Attack: {{ enemy.attack }}</p>
-    {% if current_player == player1 %}
-        <p> Tura {{ player1.name }} </p>
-        <form action="{{ url_for('hotseat_fight') }}" method="post">
-            <input type="submit" name="action" value="attack">
-            <input type="submit" name="action" value="heal">
-            <input type="submit" name="action" value="pass">
-        </form>
-    {% else %}
-        <p> Tura {{ player2.name }} </p>
-        <form action="{{ url_for('hotseat_fight') }}" method="post">
-            <input type="submit" name="action" value="attack">
-            <input type="submit" name="action" value="heal">
-            <input type="submit" name="action" value="pass">
-        </form>
-    {% endif %}
+    <div class="battle-options">
+
+        {% if current_player == player1 %}
+            <p> Tura {{ player1.name }} </p>
+            <form action="{{ url_for('hotseat_fight') }}" method="post">
+                <input type="submit" name="action" value="attack">
+                <input type="submit" name="action" value="heal">
+                <input type="submit" name="action" value="pass">
+            </form>
+        {% else %}
+            <p> Tura {{ player2.name }} </p>
+            <form action="{{ url_for('hotseat_fight') }}" method="post">
+                <input type="submit" name="action" value="attack">
+                <input type="submit" name="action" value="heal">
+                <input type="submit" name="action" value="pass">
+            </form>
+        {% endif %}
+    </div>
 
 {% endblock %}
 ```

@@ -9,9 +9,12 @@
     <p>Enemy Attack: {{ enemy.attack }}</p>
     {#    <a href="{{ url_for('fight') }}">Attack</a>#}
     {#    attack or heal in post form#}
-    <form action="{{ url_for('fight') }}" method="post">
-        <input type="submit" name="action" value="attack">
-        <input type="submit" name="action" value="heal">
-        <input type="submit" name="action" value="pass">
-    </form>
+    <div class="battle-options">
+
+        <form action="{{ url_for('fight') }}" method="post">
+            <input type="submit" name="action" value="attack">
+            <input type="submit" name="action" value="heal">
+            <input type="submit" name="action" value="pass">
+        </form>
+    </div>
 {% endblock %}
