@@ -78,6 +78,7 @@ def fight():
                 return redirect(url_for('game_over', result='lost'))
             elif not enemy.is_alive():
                 game.reset_action_points(player)
+                game.give_gold(player)
                 return redirect(url_for('between_levels'))
             return redirect(url_for('singleplayer'))
     else:
@@ -186,6 +187,8 @@ def hotseat_fight():
             elif not enemy.is_alive():
                 game.reset_action_points(player1)
                 game.reset_action_points(player2)
+                game.give_gold(player1)
+                game.give_gold(player2)
                 return redirect(url_for('between_levels_hotseat'))
             return redirect(url_for('hotseat_start'))
 

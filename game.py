@@ -159,6 +159,9 @@ class Game:
             player.attack_potions += 1
             player.gold -= 10
 
+    def give_gold(self, player):
+        player.gold += 10
+
     def reset_action_points(self, player):
         if self.is_not_solo:
             self.player1.action_points = 5
