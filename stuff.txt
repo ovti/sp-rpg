@@ -13,7 +13,6 @@ pip freeze > requirements.txt
 pip install -r requirements.txt
 
 
-wybór trybu (singleplayer, multiplayer, hotseat) -> wybór postaci -> kolejne walki az do smierci -> wynik postaci
 
 
 
