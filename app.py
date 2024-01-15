@@ -184,6 +184,8 @@ def hotseat_fight():
             if not player.is_alive():
                 return redirect(url_for('game_over', result='lost'))
             elif not enemy.is_alive():
+                game.reset_action_points(player1)
+                game.reset_action_points(player2)
                 return redirect(url_for('between_levels_hotseat'))
             return redirect(url_for('hotseat_start'))
 
