@@ -3,14 +3,25 @@
     <meta http-equiv="refresh" content="1">
 {% endblock %}
 {% block content %}
-    <p> {{ player1.name }} vs {{ player2.name }} </p>
-    <p> {{ player1.name }} Health: {{ player1.health }} </p>
-    <p> {{ player1.name }} Attack: {{ player1.attack }} </p>
-    <p> {{ player1.name }} Action points: {{ player1.action_points }} </p>
-
-    <p> {{ player2.name }} Health: {{ player2.health }} </p>
-    <p> {{ player2.name }} Attack: {{ player2.attack }} </p>
-    <p> {{ player2.name }} Action points: {{ player2.action_points }} </p>
+    <div class="battle-window">
+        <div class="battle-player">
+            <h2>Player: {{ player1.name }}</h2>
+            <p>Health: {{ player1.health }}</p>
+            <p>Attack: {{ player1.attack }}</p>
+            <img class="character-image"
+                 src="{{ url_for('static', filename='img/player/' + player1.character.lower() + '.png') }}"
+                 alt="{{ player1.name }}">
+        </div>
+        <h1>vs</h1>
+        <div class="battle-enemy">
+            <h2>Player: {{ player2.name }}</h2>
+            <p>Health: {{ player2.health }}</p>
+            <p>Attack: {{ player2.attack }}</p>
+            <img class="character-image"
+                 src="{{ url_for('static', filename='img/player/' + player2.character.lower() + '.png') }}"
+                 alt="{{ player2.name }}">
+        </div>
+    </div>
 
     <div class="battle-options">
         {% if current_player == player1 and session['player1'] == 'player1' %}
@@ -29,26 +40,4 @@
             </form>
         {% endif %}
     </div>
-
 {% endblock %}
-
-{#{% extends 'base.html' %}#}
-{#{% block head %}#}
-{#    <meta http-equiv="refresh" content="1">#}
-{#{% endblock %}#}
-{#{% block content %}#}
-{#    <p> {{ player1.name }} vs {{ player2.name }} </p>#}
-{#    <p> {{ player1.name }} Health: {{ player1.health }} </p>#}
-{#    <p> {{ player1.name }} Attack: {{ player1.attack }} </p>#}
-{#    <p> {{ player2.name }} Health: {{ player2.health }} </p>#}
-{#    <p> {{ player2.name }} Attack: {{ player2.attack }} </p>#}
-{##}
-{#    {% if current_player == player1 and session['player1'] == 'player1' %}#}
-{#        <p> Tura {{ player1.name }} </p>#}
-{#        <a href="{{ url_for('multiplayer_attack') }}"> {{ player1.name }} Attack </a>#}
-{#    {% elif current_player == player2 and session['player2'] == 'player2' %}#}
-{#        <p> Tura {{ player2.name }} </p>#}
-{#        <a href="{{ url_for('multiplayer_attack') }}"> {{ player2.name }} Attack </a>#}
-{#    {% endif %}#}
-{##}
-{#{% endblock %}#}

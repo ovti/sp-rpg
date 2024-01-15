@@ -1,54 +1,31 @@
 {% extends 'base.html' %}
 {% block content %}
-    <p> {{ player1.name }} i {{ player2.name }} </p>
-    <p> {{ player1.name }} Health: {{ player1.health }} </p>
-    <p> {{ player1.name }} Attack: {{ player1.attack }} </p>
-    <p> {{ player1.name }} Action points: {{ player1.action_points }} </p>
-    <p> {{ player2.name }} Health: {{ player2.health }} </p>
-    <p> {{ player2.name }} Attack: {{ player2.attack }} </p>
-    <p> {{ player2.name }} Action points: {{ player2.action_points }} </p>
+    <div class="battle-window">
+        <div class="battle-player">
+            <h2>Character: {{ current_player.name }}</h2>
+            <p>Health: {{ current_player.health }}</p>
+            <p>Attack: {{ current_player.attack }}</p>
+            <img class="character-image"
+                 src="{{ url_for('static', filename='img/player/' + current_player.character.lower() + '.png') }}"
+                 alt="player">
+        </div>
+        <h1>vs</h1>
+        <div class="battle-enemy">
+            <h2>Enemy: {{ enemy.name }}</h2>
+            <p>Enemy Health: {{ enemy.health }}</p>
+            <p>Enemy Attack: {{ enemy.attack }}</p>
+            <img class="character-image"
+                 src="{{ url_for('static', filename='img/characters/' + enemy.name.lower() + '.png') }}" alt="enemy">
 
-    <p>Enemy: {{ enemy.name }}</p>
-    <p>Enemy Health: {{ enemy.health }}</p>
-    <p>Enemy Attack: {{ enemy.attack }}</p>
-    <div class="battle-options">
-
-        {% if current_player == player1 %}
-            <p> Tura {{ player1.name }} </p>
-            <form action="{{ url_for('hotseat_fight') }}" method="post">
-                <input type="submit" name="action" value="attack">
-                <input type="submit" name="action" value="heal">
-                <input type="submit" name="action" value="pass">
-            </form>
-        {% else %}
-            <p> Tura {{ player2.name }} </p>
-            <form action="{{ url_for('hotseat_fight') }}" method="post">
-                <input type="submit" name="action" value="attack">
-                <input type="submit" name="action" value="heal">
-                <input type="submit" name="action" value="pass">
-            </form>
-        {% endif %}
+        </div>
     </div>
 
+    <div class="battle-options">
+        <p> Action points: {{ current_player.action_points }}</p>
+        <form action="{{ url_for('hotseat_fight') }}" method="post">
+            <input type="submit" name="action" value="attack">
+            <input type="submit" name="action" value="heal">
+            <input type="submit" name="action" value="pass">
+        </form>
+    </div>
 {% endblock %}
-```
-{#{% extends 'base.html' %}#}
-{#{% block content %}#}
-{#    <p> {{ player1.name }} i {{ player2.name }} </p>#}
-{#    <p> {{ player1.name }} Health: {{ player1.health }} </p>#}
-{#    <p> {{ player1.name }} Attack: {{ player1.attack }} </p>#}
-{#    <p> {{ player2.name }} Health: {{ player2.health }} </p>#}
-{#    <p> {{ player2.name }} Attack: {{ player2.attack }} </p>#}
-{#    <p>Enemy: {{ enemy.name }}</p>#}
-{#    <p>Enemy Health: {{ enemy.health }}</p>#}
-{#    <p>Enemy Attack: {{ enemy.attack }}</p>#}
-{#    {% if current_player == player1 %}#}
-{#        <p> Tura {{ player1.name }} </p>#}
-{#        <a href="{{ url_for('hotseat_fight') }}"> {{ player1.name }} Attack </a>#}
-{#    {% else %}#}
-{#        <p> Tura {{ player2.name }} </p>#}
-{#        <a href="{{ url_for('hotseat_fight') }}"> {{ player2.name }} Attack </a>#}
-{#    {% endif %}#}
-{##}
-{#{% endblock %}#}
-{#```#}

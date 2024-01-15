@@ -306,13 +306,33 @@ a:hover {
     color: #ffd700;
 }
 
-.battle-window {
-    background: url("../img/assets/arena.png") no-repeat center center fixed;
+/*.battle-window {*/
+/*    background: url("../img/assets/arena.png") no-repeat center center fixed;*/
 
+/*}*/
+
+/*.battle-window img {*/
+/*    background-size: cover;*/
+/*    background-position: center center; !* Center the image *!*/
+/*    background-repeat: no-repeat;*/
+/*}*/
+
+.battle-window {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    gap: 5rem;
+    background: url("../img/assets/arena.png") no-repeat center center fixed;
+    background-size: cover;
+    background-position: center center;
+    background-repeat: no-repeat;
+    /*margin: 5rem;*/
+    padding: 5rem;
+    object-fit: contain;
+    background-position: -5cm -5cm;
 }
 
-.battle-window img {
-    background-size: cover;
-    background-position: center center; /* Center the image */
-    background-repeat: no-repeat;
+.character-image {
+    width: auto; /* Adjust the width as needed */
+    height: 150px; /* Maintain the aspect ratio */
 }
