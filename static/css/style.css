@@ -305,3 +305,14 @@ a:hover {
     background-color: rgba(255, 255, 255, 0.18);
     color: #ffd700;
 }
+
+.battle-window {
+    background: url("../img/assets/arena.png") no-repeat center center fixed;
+
+}
+
+.battle-window img {
+    background-size: cover;
+    background-position: center center; /* Center the image */
+    background-repeat: no-repeat;
+}

@@ -43,6 +43,14 @@ class Game:
         self.is_not_solo = False
         self.game_score = 0
 
+        self.combat_log = []
+
+    def add_to_combat_log(self, message):
+        self.combat_log.append(message)
+
+    def get_combat_log(self):
+        return self.combat_log
+
     def create_player(self, name, character):
         if character == 'fighter':
             return Player(name, 'Fighter', 100, 10, 15, 6, 3)  # has chance to block attack
