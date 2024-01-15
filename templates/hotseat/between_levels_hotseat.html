@@ -3,13 +3,29 @@
     <div class="between-levels-forms">
 
         <h1>Ukończono poziom! Wybierz statystykę do rozwoju. </h1>
-        <form action="{{ url_for('between_levels_hotseat') }}" method="post">
-            <p>Wybierz statystykę do rozwoju dla : {{ player1.name }}</p>
-            <input type="radio" name="player1_stat" value="health">HP<br>
-            <input type="radio" name="player1_stat" value="attack">Atak<br>
-            <p>Wybierz statystykę do rozwoju dla : {{ player2.name }}</p>
-            <input type="radio" name="player2_stat" value="health">HP<br>
-            <input type="radio" name="player2_stat" value="attack">Atak<br>
+        <form action="{{ url_for('between_levels_hotseat') }}" method="post" class="levels-form">
+            <div class="player1-form">
+
+                <p>Wybierz statystykę do rozwoju dla : {{ player1.name }}</p>
+                {#            <input type="radio" name="player1_stat" value="health">HP<br>#}
+                {#            <input type="radio" name="player1_stat" value="attack">Atak<br>#}
+                {#            change to select#}
+                <select name="player1_stat" required>
+                    <option value="health">HP</option>
+                    <option value="attack">Atak</option>
+                </select>
+            </div>
+            <div class="player2-form">
+
+                <p>Wybierz statystykę do rozwoju dla : {{ player2.name }}</p>
+                {#            <input type="radio" name="player2_stat" value="health">HP<br>#}
+                {#            <input type="radio" name="player2_stat" value="attack">Atak<br>#}
+                <select name="player2_stat" required>
+                    <option value="health">HP</option>
+                    <option value="attack">Atak</option>
+                </select>
+
+            </div>
             <input type="submit" value="Dalej">
         </form>
         <h1>Zakup przedmioty! </h1>

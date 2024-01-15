@@ -2,33 +2,118 @@
 {% block content %}
     <h1>Stwórz postacie:</h1>
     <div class="character-create-form">
-
         <form action="{{ url_for('hotseat_start') }}" method="post">
             <h2>Gracz 1:</h2>
             <label for="name1">Imię:</label>
             <input type="text" name="name1" id="name1" required>
-
+            <br>
+            <br>
             <label for="character1">Wybierz klasę postaci:</label>
-            <select name="character1" id="character1">
-                <option value="fighter">Fighter</option>
-                <option value="mage">Mage</option>
-                <option value="thief">Thief</option>
-                <option value="priest">Priest</option>
-            </select>
+            <div class="character-frames">
+                <div class="fighter-frame">
+                    <input type="radio" name="character1" id="fighter1" value="fighter" checked>
+                    <label for="fighter1">
+                        <img src="{{ url_for('static', filename='img/player/fighter.png') }}" alt="fighter">
+                        Fighter
+                    </label>
+                </div>
+                <div class="mage-frame">
+                    <input type="radio" name="character1" id="mage1" value="mage">
+                    <label for="mage1">
+                        <img src="{{ url_for('static', filename='img/player/mage.png') }}" alt="mage">
+                        Mage
+                    </label>
+                </div>
+                <div class="thief-frame">
+                    <input type="radio" name="character1" id="thief1" value="thief">
+                    <label for="thief1">
+                        <img src="{{ url_for('static', filename='img/player/thief.png') }}" alt="thief">
+                        Thief
+                    </label>
+                </div>
+                <div class="priest-frame">
+                    <input type="radio" name="character1" id="priest1" value="priest">
+                    <label for="priest1">
+                        <img src="{{ url_for('static', filename='img/player/priest.png') }}" alt="priest">
+                        Priest
+                    </label>
+                </div>
+            </div>
 
             <h2>Gracz 2:</h2>
             <label for="name2">Imię:</label>
             <input type="text" name="name2" id="name2" required>
-
-            <label for="character2">Wybierz klasę postaci:</label>
-            <select name="character2" id="character2">
-                <option value="fighter">Fighter</option>
-                <option value="mage">Mage</option>
-                <option value="thief">Thief</option>
-                <option value="priest">Priest</option>
-            </select>
             <br>
+            <br>
+            <label for="character2">Wybierz klasę postaci:</label>
+            <div class="character-frames">
+                <div class="fighter-frame">
+                    <input type="radio" name="character2" id="fighter2" value="fighter">
+                    <label for="fighter2">
+                        <img src="{{ url_for('static', filename='img/player/fighter.png') }}" alt="fighter">
+                        Fighter
+                    </label>
+                </div>
+                <div class="mage-frame">
+                    <input type="radio" name="character2" id="mage2" value="mage">
+                    <label for="mage2">
+                        <img src="{{ url_for('static', filename='img/player/mage.png') }}" alt="mage">
+                        Mage
+                    </label>
+                </div>
+                <div class="thief-frame">
+                    <input type="radio" name="character2" id="thief2" value="thief">
+                    <label for="thief2">
+                        <img src="{{ url_for('static', filename='img/player/thief.png') }}" alt="thief">
+                        Thief
+                    </label>
+                </div>
+                <div class="priest-frame">
+                    <input type="radio" name="character2" id="priest2" value="priest">
+                    <label for="priest2">
+                        <img src="{{ url_for('static', filename='img/player/priest.png') }}" alt="priest">
+                        Priest
+                    </label>
+                </div>
+            </div>
+
             <input type="submit" value="Stwórz">
         </form>
     </div>
 {% endblock %}
+
+
+{#{% extends 'base.html' %}#}
+{#{% block content %}#}
+{#    <h1>Stwórz postacie:</h1>#}
+{#    <div class="character-create-form">#}
+{##}
+{#        <form action="{{ url_for('hotseat_start') }}" method="post">#}
+{#            <h2>Gracz 1:</h2>#}
+{#            <label for="name1">Imię:</label>#}
+{#            <input type="text" name="name1" id="name1" required>#}
+{##}
+{#            <label for="character1">Wybierz klasę postaci:</label>#}
+{#            <select name="character1" id="character1">#}
+{#                <option value="fighter">Fighter</option>#}
+{#                <option value="mage">Mage</option>#}
+{#                <option value="thief">Thief</option>#}
+{#                <option value="priest">Priest</option>#}
+{#            </select>#}
+{##}
+{#            <h2>Gracz 2:</h2>#}
+{#            <label for="name2">Imię:</label>#}
+{#            <input type="text" name="name2" id="name2" required>#}
+{##}
+{#            <label for="character2">Wybierz klasę postaci:</label>#}
+{#            <select name="character2" id="character2">#}
+{#                <option value="fighter">Fighter</option>#}
+{#                <option value="mage">Mage</option>#}
+{#                <option value="thief">Thief</option>#}
+{#                <option value="priest">Priest</option>#}
+{#            </select>#}
+{#            <br>#}
+{#            <input type="submit" value="Stwórz">#}
+{#        </form>#}
+{#    </div>#}
+{#{% endblock %}#}

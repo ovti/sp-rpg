@@ -1,3 +1,4 @@
+from flask import flash
 from player import Player
 
 
@@ -6,14 +7,14 @@ class Game:
 
         self.enemies = {
             'kid1': Player('Kid1', 'Enemy', 10, 5),
-            'kid2': Player('Kid2', 'Enemy', 20, 6, 0, 1, 1),
-            'kid3': Player('Kid3', 'Enemy', 30, 8, 0, 0, 1),
-            'kid4': Player('Kid4', 'Enemy', 40, 10, 0, 1, 0),
-            'kid5': Player('Kid5', 'Enemy', 50, 12, 0, 2, 1),
-            'kid6': Player('Kid6', 'Enemy', 60, 14, 0, 1, 2),
-            'kid7': Player('Kid7', 'Enemy', 70, 16, 0, 2, 2),
+            'scott': Player('Scott', 'Enemy', 20, 6, 0, 1, 1),
+            'kid2': Player('Kid2', 'Enemy', 30, 8, 0, 0, 1),
+            'tweek': Player('Tweek', 'Enemy', 40, 10, 0, 1, 0),
+            'kid3': Player('Kid3', 'Enemy', 50, 12, 0, 2, 1),
+            'clyde': Player('Clyde', 'Enemy', 60, 14, 0, 1, 2),
+            'kid4': Player('Kid4', 'Enemy', 70, 16, 0, 2, 2),
+            'craig': Player('Craig', 'Enemy', 80, 18, 0, 2, 2),
             'butters': Player('Butters', 'Enemy', 30, 8),
-            'craig': Player('Craig', 'Enemy', 50, 10),
             'token': Player('Token', 'Enemy', 60, 12),
             'stan': Player('Stan', 'Enemy', 70, 12),
             'kyle': Player('Kyle', 'Enemy', 150, 20),
@@ -22,17 +23,17 @@ class Game:
 
         self.levels = {
             1: {'enemy': 'kid1'},
-            2: {'enemy': 'kid2'},
-            3: {'enemy': 'butters'},
-            4: {'enemy': 'kid3'},
-            5: {'enemy': 'craig'},
-            6: {'enemy': 'kid4'},
-            7: {'enemy': 'token'},
-            8: {'enemy': 'kid5'},
-            9: {'enemy': 'stan'},
-            10: {'enemy': 'kid6'},
-            11: {'enemy': 'kyle'},
-            12: {'enemy': 'kid7'},
+            2: {'enemy': 'scott'},
+            3: {'enemy': 'kid2'},
+            4: {'enemy': 'tweek'},
+            5: {'enemy': 'kid3'},
+            6: {'enemy': 'clyde'},
+            7: {'enemy': 'kid4'},
+            8: {'enemy': 'craig'},
+            9: {'enemy': 'butters'},
+            10: {'enemy': 'token'},
+            11: {'enemy': 'stan'},
+            12: {'enemy': 'kyle'},
             13: {'enemy': 'cartman'},
         }
 
@@ -78,14 +79,17 @@ class Game:
         if enemy.is_alive():
             if enemy.health < 15 and enemy.health_potions > 0:
                 self.heal(enemy)
+                flash('{} used a health potion'.format(enemy.name))
             else:
                 self.enemy_attack(enemy, player)
+                flash('{} attacked player {} for {} damage'.format(enemy.name, player.name, enemy.attack))
 
     def heal(self, character):
         if character.health_potions > 0 and character.action_points > 0:
             character.health += 10
             character.health_potions -= 1
             character.action_points -= 1
+            flash('{} used a health potion'.format(character.name))
 
     def enemy_attack(self, attacker, target):
         target.take_damage(attacker.attack)
@@ -112,6 +116,7 @@ class Game:
     def fight(self, player, action, enemy, is_not_solo=False, is_pvp=False):
         if player.is_alive() and enemy.is_alive() and not is_pvp:
             if action == 'pass':
+                flash('{} passed the turn'.format(player.name))
                 self.enemy_move(enemy, player)
                 player.action_points = 5
                 if is_not_solo:
@@ -120,6 +125,7 @@ class Game:
             if player.action_points > 0:
                 damage_dealt = self.perform_player_move(player, action)
                 if damage_dealt is not None:
+                    flash('{} attacked {} for {} damage'.format(player.name, enemy.name, damage_dealt))
                     enemy.take_damage(damage_dealt)
 
             if player.action_points <= 0:
@@ -131,12 +137,14 @@ class Game:
 
         elif player.is_alive() and enemy.is_alive() and is_pvp:
             if action == 'pass':
+                flash('{} passed the turn'.format(player.name))
                 player.action_points = 5
                 self.switch_player()
 
             if player.action_points > 0:
                 damage_dealt = self.perform_player_move(player, action)
                 if damage_dealt is not None:
+                    flash('{} attacked {} for {} damage'.format(player.name, enemy.name, damage_dealt))
                     enemy.take_damage(damage_dealt)
 
             if player.action_points <= 0:

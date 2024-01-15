@@ -4,7 +4,7 @@
 {% endblock %}
 {% block content %}
     <div class="battle-window">
-        <div class="battle-player">
+        <div class="battle-player-mp">
             <h2>Player: {{ player1.name }}</h2>
             <p>Health: {{ player1.health }}</p>
             <p>Attack: {{ player1.attack }}</p>
@@ -12,8 +12,7 @@
                  src="{{ url_for('static', filename='img/player/' + player1.character.lower() + '.png') }}"
                  alt="{{ player1.name }}">
         </div>
-        <h1>vs</h1>
-        <div class="battle-enemy">
+        <div class="battle-enemy-mp">
             <h2>Player: {{ player2.name }}</h2>
             <p>Health: {{ player2.health }}</p>
             <p>Attack: {{ player2.attack }}</p>

@@ -5,14 +5,40 @@
         <form action="{{ url_for('singleplayer_start') }}" method="post">
             <label for="name">Imię:</label>
             <input type="text" name="name" id="name" required>
-
+            <br>
+            <br>
             <label for="character">Wybierz klasę postaci:</label>
-            <select name="character" id="character">
-                <option value="fighter">Fighter</option>
-                <option value="mage">Mage</option>
-                <option value="thief">Thief</option>
-                <option value="priest">Priest</option>
-            </select>
+            <div class="character-frames">
+
+                <div class="fighter-frame">
+                    <input type="radio" name="character" id="fighter" value="fighter" checked>
+                    <label for="fighter">
+                        <img src="{{ url_for('static', filename='img/player/fighter.png') }}" alt="fighter">
+                        Fighter
+                    </label>
+                </div>
+                <div class="mage-frame">
+                    <input type="radio" name="character" id="mage" value="mage">
+                    <label for="mage">
+                        <img src="{{ url_for('static', filename='img/player/mage.png') }}" alt="mage">
+                        Mage
+                    </label>
+                </div>
+                <div class="thief-frame">
+                    <input type="radio" name="character" id="thief" value="thief">
+                    <label for="thief">
+                        <img src="{{ url_for('static', filename='img/player/thief.png') }}" alt="thief">
+                        Thief
+                    </label>
+                </div>
+                <div class="priest-frame">
+                    <input type="radio" name="character" id="priest" value="priest">
+                    <label for="priest">
+                        <img src="{{ url_for('static', filename='img/player/priest.png') }}" alt="priest">
+                        Priest
+                    </label>
+                </div>
+            </div>
 
             <input type="submit" value="Stwórz">
         </form>

@@ -2,16 +2,15 @@
 {% block content %}
     <div class="battle-window">
         <div class="battle-player">
-            <h2>Character: {{ current_player.name }}</h2>
+            <h2>{{ current_player.name }}</h2>
             <p>Health: {{ current_player.health }}</p>
             <p>Attack: {{ current_player.attack }}</p>
             <img class="character-image"
                  src="{{ url_for('static', filename='img/player/' + current_player.character.lower() + '.png') }}"
                  alt="player">
         </div>
-        <h1>vs</h1>
         <div class="battle-enemy">
-            <h2>Enemy: {{ enemy.name }}</h2>
+            <h2>{{ enemy.name }}</h2>
             <p>Enemy Health: {{ enemy.health }}</p>
             <p>Enemy Attack: {{ enemy.attack }}</p>
             <img class="character-image"

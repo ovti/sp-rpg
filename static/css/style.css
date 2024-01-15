@@ -100,6 +100,22 @@ a:hover {
     color: #fff;
 }
 
+.character-create-form label:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffd700;
+}
+
+/*for radio*/
+.character-create-form input[type="radio"] {
+    visibility: hidden;
+}
+
+.character-create-form input[type="radio"]:checked + label {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffd700;
+}
+
+
 .character-create-form input {
     margin: 0.5rem;
     padding: 0.5rem;
@@ -112,6 +128,8 @@ a:hover {
 }
 
 .character-create-form input[type="submit"] {
+    font-size: 1.5rem;
+    font-weight: 700;
     margin: 0.5rem;
     padding: 0.5rem;
     border-radius: 5px;
@@ -147,6 +165,27 @@ a:hover {
     backdrop-filter: blur(5px);
     -webkit-backdrop-filter: blur(5px);
     color: #fff;
+}
+
+
+.character-create-form img {
+    width: auto;
+    height: 150px;
+}
+
+.fighter-frame, .thief-frame, .mage-frame, .priest-frame {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.character-frames {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 .lobby {
@@ -306,6 +345,43 @@ a:hover {
     color: #ffd700;
 }
 
+.levels-form {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+}
+
+.levels-form h1 {
+    font-size: 2rem;
+    font-weight: 700;
+    margin-bottom: 1rem;
+}
+
+.levels-form select {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: #fff;
+}
+
+.levels-form input[type="submit"] {
+    margin: 0.5rem;
+    padding: 0.5rem;
+    border-radius: 5px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    background-color: rgba(0, 0, 0, 0.5);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    color: #fff;
+    cursor: pointer;
+}
+
 /*.battle-window {*/
 /*    background: url("../img/assets/arena.png") no-repeat center center fixed;*/
 
@@ -326,13 +402,115 @@ a:hover {
     background-size: cover;
     background-position: center center;
     background-repeat: no-repeat;
-    /*margin: 5rem;*/
     padding: 5rem;
-    object-fit: contain;
-    background-position: -5cm -5cm;
+    object-fit: cover;
+    background-position: -15rem -15rem;
+}
+
+.battle-player {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    animation: moveAroundRight 3s infinite alternate;
+
+}
+
+.battle-enemy {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    animation: moveAroundLeft 3s infinite alternate;
+
+}
+
+.battle-player-mp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    animation: moveAroundRightMp 5s infinite alternate;
+}
+
+.battle-enemy-mp {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    animation: moveAroundLeftMp 5s infinite alternate;
+
 }
 
 .character-image {
-    width: auto; /* Adjust the width as needed */
-    height: 150px; /* Maintain the aspect ratio */
+    width: auto;
+    height: 150px;
 }
+
+@keyframes moveAroundRightMp {
+    0% {
+        transform: translateX(0px) translateY(0px);
+    }
+    100% {
+        transform: translateX(20px) translateY(20px);
+    }
+}
+
+@keyframes moveAroundLeftMp {
+    0% {
+        transform: translateX(0px) translateY(0px);
+    }
+    100% {
+        transform: translateX(-20px) translateY(20px);
+    }
+}
+
+@keyframes moveAroundRight {
+    0% {
+        transform: translateX(0px) translateY(0px);
+    }
+    100% {
+        transform: translateX(20px) translateY(20px);
+    }
+}
+
+@keyframes moveAroundLeft {
+    0% {
+        transform: translateX(0px) translateY(0px);
+    }
+    100% {
+        transform: translateX(-20px) translateY(20px);
+    }
+}
+
+.gamelog-flash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    background-color: rgba(255, 90, 232, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.gamelog-flash ul {
+    list-style: none;
+    margin: 1rem;
+}
+
+.gamelog-flash ul li {
+    list-style: none;
+    margin: 1rem;
+}
+
