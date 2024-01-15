@@ -1,11 +1,10 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Wybierz tryb:</h1>
-    <h3><a href="{{ url_for('singleplayer') }}">Gra singleplayer 🕹️</a></h3>
-    <h3><a href="{{ url_for('hotseat') }}">Gra hotseat 🎮</a></h3>
-    <h3><a href="{{ url_for('multiplayer') }}">Gra multiplayer (Tryb PVP) 🌐</a></h3>
+    <h1>Choose your game mode</h1>
+    <h3><a href="{{ url_for('singleplayer') }}">Singleplayer 🕹️</a></h3>
+    <h3><a href="{{ url_for('hotseat') }}">Hotseat 🎮</a></h3>
+    <h3><a href="{{ url_for('multiplayer') }}">Mltiplayer (PVP) 🌐</a></h3>
 
-    {#    add image #}
     <div class="main-content-img">
         <img src="{{ url_for('static', filename='img/characters/Princess_Kenny.png') }}" alt="kenny">
     </div>

@@ -2,9 +2,9 @@
 
 {% block content %}
     {% if result  == 'win' %}
-        Gratulacje, wygrałeś!
+        Congratulations, you won!
     {% else %}
-        Niestety, przegrałeś.
+        Sorry, you lost.
     {% endif %}
-    <a href="{{ url_for('index') }}">Zagraj ponownie</a>
+    <a href="{{ url_for('index') }}">Play again</a>
 {% endblock %}

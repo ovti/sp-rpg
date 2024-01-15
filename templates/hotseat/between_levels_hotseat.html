@@ -26,24 +26,25 @@
                 </select>
 
             </div>
-            <input type="submit" value="Dalej">
+            {#            <input type="submit" value="Dalej">#}
+            <button type="submit">Dalej</button>
         </form>
-        <h1>Zakup przedmioty! </h1>
-        <p>Wybierz przedmiot do zakupu dla : {{ player1.name }}</p>
-        <p>Posiadasz {{ player1.gold }} złota</p>
-        <p>Posiadasz {{ player1.health_potions }} mikstur zdrowia</p>
-        <p>Posiadasz {{ player1.attack_potions }} mikstur ataku</p>
+        <h1>Item shop</h1>
+        <p>Items for: {{ player1.name }}</p>
+        <p>You have {{ player1.gold }} gold</p>
+        <p>You have {{ player1.health_potions }} health potions</p>
+        <p>You have {{ player1.attack_potions }} attack potions</p>
         <form action="{{ url_for('vendor_hotseat_1') }}" method="post">
-            <input type="submit" name="action" value="attack">
-            <input type="submit" name="action" value="health">
+            <button type="submit" name="action" value="attack">Attack potion</button>
+            <button type="submit" name="action" value="health">Health potion</button>
         </form>
-        <p>Wybierz przedmiot do zakupu dla : {{ player2.name }}</p>
-        <p>Posiadasz {{ player2.gold }} złota</p>
-        <p>Posiadasz {{ player2.health_potions }} mikstur zdrowia</p>
-        <p>Posiadasz {{ player2.attack_potions }} mikstur ataku</p>
+        <p>Items for:: {{ player2.name }}</p>
+        <p>You have {{ player2.gold }} gold</p>
+        <p>You have {{ player2.health_potions }} health potions</p>
+        <p>You have {{ player2.attack_potions }} attack potions</p>
         <form action="{{ url_for('vendor_hotseat_2') }}" method="post">
-            <input type="submit" name="action" value="attack">
-            <input type="submit" name="action" value="health">
+            <button type="submit" name="action" value="attack">Attack potion</button>
+            <button type="submit" name="action" value="health">Health potion</button>
         </form>
     </div>
 {% endblock %}

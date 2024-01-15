@@ -1,14 +1,14 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Stwórz postacie:</h1>
+    <h1>Create characters:</h1>
     <div class="character-create-form">
         <form action="{{ url_for('hotseat_start') }}" method="post">
-            <h2>Gracz 1:</h2>
-            <label for="name1">Imię:</label>
+            <h2>Player 1:</h2>
+            <label for="name1">Name:</label>
             <input type="text" name="name1" id="name1" required>
             <br>
             <br>
-            <label for="character1">Wybierz klasę postaci:</label>
+            <label for="character1">Pick your class:</label>
             <div class="character-frames">
                 <div class="fighter-frame">
                     <input type="radio" name="character1" id="fighter1" value="fighter" checked>
@@ -40,15 +40,15 @@
                 </div>
             </div>
 
-            <h2>Gracz 2:</h2>
-            <label for="name2">Imię:</label>
+            <h2>Player 2:</h2>
+            <label for="name2">Name:</label>
             <input type="text" name="name2" id="name2" required>
             <br>
             <br>
-            <label for="character2">Wybierz klasę postaci:</label>
+            <label for="character2">Pick your class:</label>
             <div class="character-frames">
                 <div class="fighter-frame">
-                    <input type="radio" name="character2" id="fighter2" value="fighter">
+                    <input type="radio" name="character2" id="fighter2" value="fighter" checked>
                     <label for="fighter2">
                         <img src="{{ url_for('static', filename='img/player/fighter.png') }}" alt="fighter">
                         Fighter
@@ -77,7 +77,8 @@
                 </div>
             </div>
 
-            <input type="submit" value="Stwórz">
+            {#            <input type="submit" value="Stwórz">#}
+            <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
 {% endblock %}

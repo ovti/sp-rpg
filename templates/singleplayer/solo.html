@@ -20,11 +20,14 @@
     </div>
 
     <div class="battle-options">
-        <p> Action points: {{ player.action_points }}</p>
+        <h3> Action points: {{ player.action_points }}</h3>
         <form action="{{ url_for('fight') }}" method="post">
-            <input type="submit" name="action" value="attack">
-            <input type="submit" name="action" value="heal">
-            <input type="submit" name="action" value="pass">
+            <button type="submit" name="action" value="attack">Attack</button>
+            <button type="submit" name="action" value="heal">Use health potion</button>
+            <button type="submit" name="action" value="attack_potion">Use attack potion</button>
+            <button type="submit" name="action" value="pass">Pass</button>
         </form>
+        <p> Your heal potions: {{ player.health_potions }}</p>
+        <p>Your attack potions: {{ player.attack_potions }}</p>
     </div>
 {% endblock %}

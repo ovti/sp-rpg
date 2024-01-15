@@ -91,6 +91,13 @@ class Game:
             character.action_points -= 1
             flash('{} used a health potion'.format(character.name))
 
+    def attack_potion(self, character):
+        if character.attack_potions > 0 and character.action_points > 0:
+            character.attack += 5
+            character.attack_potions -= 1
+            character.action_points -= 1
+            flash('{} used an attack potion'.format(character.name))
+
     def enemy_attack(self, attacker, target):
         target.take_damage(attacker.attack)
         attacker.action_points = 5
@@ -99,6 +106,7 @@ class Game:
         moves = {
             'attack': self.player_attack,
             'heal': self.heal,
+            'attack_potion': self.attack_potion,
         }
 
         if action in moves:

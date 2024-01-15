@@ -1,15 +1,15 @@
 {% extends 'base.html' %}
 {% block content %}
-    <h1>Stwórz postać:</h1>
+    <h1>Create character:</h1>
     <div class="character-create-form">
 
         <form action="{{ url_for('multiplayer_join') }}" method="post">
-            <h2>Gracz 2:</h2>
-            <label for="name">Imię:</label>
+            <h2>Player 2:</h2>
+            <label for="name">Name:</label>
             <input type="text" name="name" id="name" required>
             <br>
             <br>
-            <label for="character">Wybierz klasę postaci: </label>
+            <label for="character">Pick your class: </label>
             <div class="character-frames">
 
                 <div class="fighter-frame">
@@ -46,7 +46,8 @@
             <br>
             <input type="hidden" name="game_id" value="{{ game_id }}">
 
-            <input type="submit" value="Stwórz">
+            {#            <input type="submit" value="Stwórz">#}
+            <button type="submit" class="btn btn-primary">Create</button>
         </form>
     </div>
 {% endblock %}

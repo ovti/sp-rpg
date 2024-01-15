@@ -4,9 +4,9 @@
 {% endblock %}
 {% block content %}
     <div class="lobby">
-        <h1>Rozpoczynanie rozgrywki...</h1>
-        <p> Gracz 1: {{ game.player1.name }}</p>
-        <p> Gracz 2: {% if game.player2 %}{{ game.player2.name }}{% else %}Oczekiwanie na przeciwnika...{% endif %}</p>
+        <h1>Starting the game...</h1>
+        <p> Player 1: {{ game.player1.name }}</p>
+        <p> Player 2: {% if game.player2 %}{{ game.player2.name }}{% else %}Waiting for player to join...{% endif %}</p>
     </div>
 {% endblock %}
 

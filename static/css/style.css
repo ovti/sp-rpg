@@ -127,7 +127,7 @@ a:hover {
     color: #fff;
 }
 
-.character-create-form input[type="submit"] {
+.character-create-form button[type="submit"] {
     font-size: 1.5rem;
     font-weight: 700;
     margin: 0.5rem;
@@ -141,17 +141,17 @@ a:hover {
     cursor: pointer;
 }
 
-.character-create-form input[type="submit"]:hover {
+.character-create-form button[type="submit"]:hover {
     background-color: rgba(255, 255, 255, 0.18);
     color: #ffd700;
 }
 
-.character-create-form input[type="submit"]:active {
+.character-create-form button[type="submit"]:active {
     background-color: rgba(255, 255, 255, 0.18);
     color: #ffd700;
 }
 
-.character-create-form input[type="submit"]:focus {
+.character-create-form button[type="submit"]:focus {
     background-color: rgba(255, 255, 255, 0.18);
     color: #ffd700;
 }
@@ -271,9 +271,10 @@ a:hover {
     margin: 1rem;
 }
 
-.battle-options input[type="submit"] {
+.battle-options button[type="submit"] {
     margin: 0.5rem;
     padding: 0.5rem;
+    font-size: 1.2rem;
     border-radius: 5px;
     border: 1px solid rgba(255, 255, 255, 0.18);
     background-color: rgba(0, 0, 0, 0.5);
@@ -283,7 +284,7 @@ a:hover {
     cursor: pointer;
 }
 
-.battle-options input[type="submit"]:hover {
+.battle-options button[type="submit"]:hover {
     background-color: rgba(255, 255, 255, 0.18);
     color: #ffd700;
 }
@@ -309,7 +310,7 @@ a:hover {
     margin: 1rem;
 }
 
-.between-levels-forms input[type="submit"] {
+.between-levels-forms button[type="submit"] {
     margin: 0.5rem;
     padding: 0.5rem;
     border-radius: 5px;
@@ -319,6 +320,11 @@ a:hover {
     -webkit-backdrop-filter: blur(5px);
     color: #fff;
     cursor: pointer;
+}
+
+.between-levels-forms button[type="submit"]:hover {
+    background-color: rgba(255, 255, 255, 0.18);
+    color: #ffd700;
 }
 
 /*for radio type*/

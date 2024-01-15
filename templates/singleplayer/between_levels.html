@@ -1,29 +1,27 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="between-levels-forms">
-        <h1>Ukończono poziom! Wybierz statystykę do rozwoju. </h1>
+        <h1>You won! Choose stat to upgrade</h1>
         <form action="{{ url_for('between_levels') }}" method="post" class="levels-form">
-            {#            <input type="radio" name="stat" value="health">HP<br>#}
-            {#            <input type="radio" name="stat" value="attack">Atak<br>#}
+
             <select name="stat" required>
                 <option value="health">HP</option>
-                <option value="attack">Atak</option>
+                <option value="attack">Attack</option>
             </select>
 
-            <input type="submit" value="Dalej">
+            {#            <input type="submit" value="Dalej">#}
+            <button type="submit">Next</button>
         </form>
 
-        <h1>Zakup przedmioty! </h1>
-        <p>Twoje złoto: {{ player.gold }}</p>
-        <p>Twoje mikstury zdrowia: {{ player.health_potions }}</p>
-        <p>Twoje mikstury ataku: {{ player.attack_potions }}</p>
+        <h1>Item shop</h1>
+        <p>Your gold: {{ player.gold }}</p>
+        <p>Your health potions: {{ player.health_potions }}</p>
+        <p>Your attack potions: {{ player.attack_potions }}</p>
 
         <form action="{{ url_for('vendor') }}" method="post">
-            <input type="submit" name="action" value="attack">
-            <input type="submit" name="action" value="health">
+            <button type="submit" name="action" value="attack">Attack potion</button>
+            <button type="submit" name="action" value="health">Health potion</button>
         </form>
     </div>
-    {#    <form action="{{ url_for('next_level') }}" method="post">#}
-    {#        <input type="submit" value="Dalej">#}
-    {#    </form>#}
+
 {% endblock %}
