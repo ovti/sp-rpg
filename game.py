@@ -55,6 +55,8 @@ class Game:
 
     def get_info(self):
         enemy = self.enemies.get(self.levels[self.current_level]['enemy'])
+        if not self.is_not_solo:
+            enemy.boost_stats()
         return enemy, self.current_level
 
     def switch_player(self):
@@ -118,8 +120,7 @@ class Game:
                 if is_not_solo:
                     self.switch_player()
 
-                # if is_not_solo:
-                #     self.switch_player()
+
         elif player.is_alive() and enemy.is_alive() and is_pvp:
             if action == 'pass':
                 player.action_points = 5
@@ -133,8 +134,6 @@ class Game:
             if player.action_points <= 0:
                 player.action_points = 5
                 self.switch_player()
-
-                # self.switch_player()
 
         return player, enemy
 
@@ -168,8 +167,6 @@ class Game:
             self.player2.action_points = 5
         else:
             player.action_points = 5
-        # self.player1.action_points = 5
-        # self.player2.action_points = 5
 
     # def enemy_move(self, enemy, player):
     #     if enemy.is_alive():

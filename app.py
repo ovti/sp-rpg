@@ -150,7 +150,6 @@ def hotseat_start():
         character1 = request.form['character1']
         name2 = request.form['name2']
         character2 = request.form['character2']
-
         if name1 and character1 and name2 and character2:
             games[session['key']] = Game()
             game = games[session['key']]
@@ -158,10 +157,9 @@ def hotseat_start():
             game.player2 = game.create_player(name2, character2)
             game.current_player = game.player1
             enemy, level = game.get_info()
+            enemy.boost_stats()
             return render_template('hotseat/hot.html', player1=game.player1, player2=game.player2, enemy=enemy,
                                    level=level, current_player=game.current_player)
-            # return render_template('hotseat/hot.html', player1=game.player1, player2=game.player2, enemy=enemy,
-            #                        level=level)
         else:
             return redirect(url_for('index'))
 

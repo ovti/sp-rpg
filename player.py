@@ -12,15 +12,6 @@ class Player:
     def take_damage(self, damage):
         self.health -= damage
 
-    # def use_potion(self, potion):
-    #     if self.potions[potion] > 0:
-    #         if potion == 'health':
-    #             self.health += 10
-    #             self.potions[potion] -= 1
-    #         elif potion == 'attack':
-    #             self.attack += 5
-    #             self.potions[potion] -= 1
-
     def level_up(self, stat):
         if stat == 'health':
             self.health += 10
@@ -31,3 +22,7 @@ class Player:
 
     def is_alive(self):
         return self.health > 0
+
+    def boost_stats(self):
+        self.health *= 2
+        self.attack *= 2
