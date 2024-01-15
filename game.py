@@ -159,6 +159,15 @@ class Game:
             player.attack_potions += 1
             player.gold -= 10
 
+    def reset_action_points(self, player):
+        if self.is_not_solo:
+            self.player1.action_points = 5
+            self.player2.action_points = 5
+        else:
+            player.action_points = 5
+        # self.player1.action_points = 5
+        # self.player2.action_points = 5
+
     # def enemy_move(self, enemy, player):
     #     if enemy.is_alive():
     #         if enemy.health < 15 and enemy.health_potions > 0:

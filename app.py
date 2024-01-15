@@ -53,6 +53,7 @@ def singleplayer_start():
             games[session['key']] = Game()
             game = games[session['key']]
             game.player = game.create_player(name, character)
+            # game.current_player = game.player
             enemy, level = game.get_info()
             return render_template('singleplayer/solo.html', player=game.player, enemy=enemy, level=level)
         else:
@@ -76,6 +77,7 @@ def fight():
             if not player.is_alive():
                 return redirect(url_for('game_over', result='lost'))
             elif not enemy.is_alive():
+                game.reset_action_points(player)
                 return redirect(url_for('between_levels'))
             return redirect(url_for('singleplayer'))
     else:
@@ -225,6 +227,51 @@ def between_levels_hotseat():
         return render_template('hotseat/between_levels_hotseat.html', player1=game.player1, player2=game.player2)
     else:
         return redirect(url_for('index'))
+
+
+@app.route('/vendor_hotseat_1', methods=['POST', 'GET'])
+def vendor_hotseat_1():
+    if session['key'] in games:
+        game = games[session['key']]
+        player = game.player1
+        if request.method == 'POST':
+            action = request.form['action']
+        else:
+            action = None
+        game.vendor(player, action)
+        return render_template('hotseat/between_levels_hotseat.html', player1=game.player1, player2=game.player2)
+    else:
+        return redirect(url_for('index'))
+
+
+@app.route('/vendor_hotseat_2', methods=['POST', 'GET'])
+def vendor_hotseat_2():
+    if session['key'] in games:
+        game = games[session['key']]
+        player = game.player2
+        if request.method == 'POST':
+            action = request.form['action']
+        else:
+            action = None
+        game.vendor(player, action)
+        return render_template('hotseat/between_levels_hotseat.html', player1=game.player1, player2=game.player2)
+    else:
+        return redirect(url_for('index'))
+
+
+# @app.route('/vendor', methods=['POST', 'GET'])
+# def vendor():
+#     if session['key'] in games:
+#         game = games[session['key']]
+#         player = game.player
+#         if request.method == 'POST':
+#             action = request.form['action']
+#         else:
+#             action = None
+#         game.vendor(player, action)
+#         return render_template('singleplayer/between_levels.html', player=game.player)
+#     else:
+#         return redirect(url_for('index'))
 
 
 @app.route('/next_level_hotseat', methods=['POST', 'GET'])

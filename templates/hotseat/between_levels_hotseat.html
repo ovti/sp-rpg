@@ -10,5 +10,21 @@
         <input type="radio" name="player2_stat" value="attack">Atak<br>
         <input type="submit" value="Dalej">
     </form>
-
+    <h1>Zakup przedmioty! </h1>
+    <p>Wybierz przedmiot do zakupu dla : {{ player1.name }}</p>
+    <p>Posiadasz {{ player1.gold }} złota</p>
+    <p>Posiadasz {{ player1.health_potions }} mikstur zdrowia</p>
+    <p>Posiadasz {{ player1.attack_potions }} mikstur ataku</p>
+    <form action="{{ url_for('vendor_hotseat_1') }}" method="post">
+        <input type="submit" name="action" value="attack">
+        <input type="submit" name="action" value="health">
+    </form>
+    <p>Wybierz przedmiot do zakupu dla : {{ player2.name }}</p>
+    <p>Posiadasz {{ player2.gold }} złota</p>
+    <p>Posiadasz {{ player2.health_potions }} mikstur zdrowia</p>
+    <p>Posiadasz {{ player2.attack_potions }} mikstur ataku</p>
+    <form action="{{ url_for('vendor_hotseat_2') }}" method="post">
+        <input type="submit" name="action" value="attack">
+        <input type="submit" name="action" value="health">
+    </form>
 {% endblock %}
