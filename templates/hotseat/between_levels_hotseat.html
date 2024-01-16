@@ -34,17 +34,23 @@
         <p>You have {{ player1.gold }} gold</p>
         <p>You have {{ player1.health_potions }} health potions</p>
         <p>You have {{ player1.attack_potions }} attack potions</p>
+        <p>You have {{ player1.mysterious_potions }} mysterious potions</p>
         <form action="{{ url_for('vendor_hotseat_1') }}" method="post">
             <button type="submit" name="action" value="attack">Attack potion</button>
             <button type="submit" name="action" value="health">Health potion</button>
+            <button type="submit" name="action" value="mysterious-potion">Mysterious potion(150g)</button>
+
         </form>
         <p>Items for:: {{ player2.name }}</p>
         <p>You have {{ player2.gold }} gold</p>
         <p>You have {{ player2.health_potions }} health potions</p>
         <p>You have {{ player2.attack_potions }} attack potions</p>
+        <p>You have {{ player2.mysterious_potions }} mysterious potions</p>
         <form action="{{ url_for('vendor_hotseat_2') }}" method="post">
             <button type="submit" name="action" value="attack">Attack potion</button>
             <button type="submit" name="action" value="health">Health potion</button>
+            <button type="submit" name="action" value="mysterious-potion">Mysterious potion(150g)</button>
+
         </form>
     </div>
 {% endblock %}

@@ -9,7 +9,6 @@
                 <option value="attack">Attack</option>
             </select>
 
-            {#            <input type="submit" value="Dalej">#}
             <button type="submit">Next</button>
         </form>
 
@@ -17,10 +16,13 @@
         <p>Your gold: {{ player.gold }}</p>
         <p>Your health potions: {{ player.health_potions }}</p>
         <p>Your attack potions: {{ player.attack_potions }}</p>
+        <p>Your mysterious potions: {{ player.mysterious_potions }}</p>
 
         <form action="{{ url_for('vendor') }}" method="post">
-            <button type="submit" name="action" value="attack">Attack potion</button>
-            <button type="submit" name="action" value="health">Health potion</button>
+            <button type="submit" name="action" value="attack">Attack potion(15g)</button>
+            <button type="submit" name="action" value="health">Health potion(10g)</button>
+            <button type="submit" name="action" value="mysterious-potion">Mysterious potion(150g)</button>
+
         </form>
     </div>
 

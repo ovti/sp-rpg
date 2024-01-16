@@ -266,7 +266,6 @@ a:hover {
 .battle-options form {
     display: flex;
     justify-content: center;
-    align-items: center;
     flex-direction: row;
     margin: 1rem;
 }

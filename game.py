@@ -1,4 +1,5 @@
 from flask import flash
+import random
 from player import Player
 
 
@@ -54,13 +55,13 @@ class Game:
 
     def create_player(self, name, character):
         if character == 'fighter':
-            return Player(name, 'Fighter', 100, 10, 15, 6, 3)  # has chance to block attack
+            return Player(name, 'Fighter', 100, 10, 15, 6, 3)
         elif character == 'mage':
-            return Player(name, 'Mage', 80, 15, 5, 1, 1)  # can cast protective spell
+            return Player(name, 'Mage', 80, 15, 5, 1, 1)
         elif character == 'thief':
-            return Player(name, 'Thief', 90, 12, 25, 1, 2)  # has chance to parry attack
+            return Player(name, 'Thief', 90, 12, 25, 1, 2)
         elif character == 'priest':
-            return Player(name, 'Priest', 60, 12, 15, 3, 1)  # can heal
+            return Player(name, 'Priest', 60, 12, 15, 3, 1)
 
     def get_info(self):
         enemy = self.enemies.get(self.levels[self.current_level]['enemy'])
@@ -77,6 +78,9 @@ class Game:
 
     def enemy_move(self, enemy, player):
         if enemy.is_alive():
+            if enemy.health < 25 and enemy.attack_potions > 0:
+                self.attack_potion(enemy)
+                flash('{} used an attack potion'.format(enemy.name))
             if enemy.health < 15 and enemy.health_potions > 0:
                 self.heal(enemy)
                 flash('{} used a health potion'.format(enemy.name))
@@ -85,18 +89,43 @@ class Game:
                 flash('{} attacked player {} for {} damage'.format(enemy.name, player.name, enemy.attack))
 
     def heal(self, character):
-        if character.health_potions > 0 and character.action_points > 0:
+        # mage can use it without action points
+        if character.character == 'Mage':
+            if character.health_potions > 0:
+                character.health += 10
+                character.health_potions -= 1
+                flash('{} used a health potion'.format(character.name))
+        elif character.health_potions > 0 and character.action_points > 0:
             character.health += 10
             character.health_potions -= 1
             character.action_points -= 1
             flash('{} used a health potion'.format(character.name))
 
     def attack_potion(self, character):
-        if character.attack_potions > 0 and character.action_points > 0:
+        if character.character == 'Mage':
+            if character.attack_potions > 0:
+                character.attack += 5
+                character.attack_potions -= 1
+                flash('{} used an attack potion'.format(character.name))
+        elif character.attack_potions > 0 and character.action_points > 0:
             character.attack += 5
             character.attack_potions -= 1
             character.action_points -= 1
             flash('{} used an attack potion'.format(character.name))
+
+    def mysterious_potion(self, character):
+        if character.mysterious_potions > 0 and character.action_points > 0:
+            character.health += 50
+            character.attack += 50
+            character.mysterious_potions -= 1
+            character.action_points -= 1
+            flash('{} used a mysterious potion'.format(character.name))
+
+    def priest_heal(self, character):
+        if character.character == 'Priest' and character.action_points >= 2:
+            character.health += 5
+            character.action_points -= 2
+            flash('{} used a priest heal'.format(character.name))
 
     def enemy_attack(self, attacker, target):
         target.take_damage(attacker.attack)
@@ -105,8 +134,11 @@ class Game:
     def perform_player_move(self, player, action):
         moves = {
             'attack': self.player_attack,
+            'quick_attack': self.quick_attack,
             'heal': self.heal,
             'attack_potion': self.attack_potion,
+            'mysterious_potion': self.mysterious_potion,
+            'priest_heal': self.priest_heal,
         }
 
         if action in moves:
@@ -117,8 +149,22 @@ class Game:
     def player_attack(self, player):
         if player.action_points >= 4:
             player.action_points -= 4
-            return player.attack
+            if player.character == 'Thief':
+                if random.randint(1, 10) > 7:
+                    return player.attack * 2
+                else:
+                    return player.attack
+            else:
+                return player.attack
+
+    def quick_attack(self, player):
+        if player.action_points >= 2 and random.randint(1, 10) > 4:
+            player.action_points -= 2
+            return player.attack / 2
         else:
+            player.action_points -= 2
+            player.health -= 5
+            flash('Quick attack failed and enemy hit back for 5 damage')
             return None
 
     def fight(self, player, action, enemy, is_not_solo=False, is_pvp=False):
@@ -178,12 +224,15 @@ class Game:
         if action == 'health' and player.gold >= 10:
             player.health_potions += 1
             player.gold -= 10
-        elif action == 'attack' and player.gold >= 10:
+        elif action == 'attack' and player.gold >= 15:
             player.attack_potions += 1
-            player.gold -= 10
+            player.gold -= 15
+        elif action == 'mysterious-potion' and player.gold >= 150:
+            player.mysterious_potions += 1
+            player.gold -= 150
 
     def give_gold(self, player):
-        player.gold += 10
+        player.gold += 20
 
     def reset_action_points(self, player):
         if self.is_not_solo:
@@ -191,44 +240,3 @@ class Game:
             self.player2.action_points = 5
         else:
             player.action_points = 5
-
-    # def enemy_move(self, enemy, player):
-    #     if enemy.is_alive():
-    #         if enemy.health < 15 and enemy.health_potions > 0:
-    #             enemy.health += 10
-    #             enemy.health_potions -= 1
-    #             enemy.action_points -= 1
-    #         else:
-    #             player.take_damage(enemy.attack)
-    #             enemy.action_points = 5
-    #
-    # def fight(self, player, action, enemy, is_not_solo=False):
-    #     if player.is_alive() and enemy.is_alive():
-    #         if player.action_points > 0:
-    #             if action == 'attack' and player.action_points >= 4:
-    #                 enemy.take_damage(player.attack)
-    #                 player.action_points -= 4
-    #             elif action == 'heal' and player.health_potions > 0 and player.action_points > 0:
-    #                 player.health += 10
-    #                 player.health_potions -= 1
-    #                 player.action_points -= 1
-    #         else:
-    #             self.enemy_move(enemy, player)
-    #             player.action_points = 5
-    #         if is_not_solo:
-    #             self.switch_player()
-    #     return player, enemy
-
-    # def fight(self, player, enemy, is_not_solo=False):
-    #     if player.is_alive() and enemy.is_alive():
-    #         enemy.take_damage(player.attack)
-    #         player.take_damage(enemy.attack)
-    #         if is_not_solo:
-    #             self.switch_player()
-    #         return player, enemy
-
-    # def pvp_fight(self, attacker, opponent):
-    #     if attacker.is_alive() and opponent.is_alive():
-    #         opponent.take_damage(attacker.attack)
-    #         self.switch_player()
-    #         return attacker, opponent

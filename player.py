@@ -1,5 +1,6 @@
 class Player:
-    def __init__(self, name, character, health, attack, gold=0, health_potions=0, attack_potions=0, action_points=5):
+    def __init__(self, name, character, health, attack, gold=0, health_potions=0, attack_potions=0, action_points=5,
+                 mysterious_potions=0):
         self.name = name
         self.character = character
         self.health = health
@@ -8,6 +9,7 @@ class Player:
         self.health_potions = health_potions
         self.attack_potions = attack_potions
         self.action_points = action_points
+        self.mysterious_potions = mysterious_potions
 
     def take_damage(self, damage):
         self.health -= damage
