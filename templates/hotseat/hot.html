@@ -10,7 +10,13 @@
                  alt="player">
         </div>
         <div class="battle-enemy">
-            <h2>{{ enemy.name }}</h2>
+            {#            <h2>{{ enemy.name }}</h2>#}
+            {#            if enemy name is Kid1, Kid2, Kid3, Kid4 - h2 elf else enemy.name#}
+            {% if enemy.name == 'Kid1' or enemy.name == 'Kid2' or enemy.name == 'Kid3' or enemy.name == 'Kid4' %}
+                <h2>Elf</h2>
+            {% else %}
+                <h2>{{ enemy.name }}</h2>
+            {% endif %}
             <p>Enemy Health: {{ enemy.health }}</p>
             <p>Enemy Attack: {{ enemy.attack }}</p>
             <img class="character-image"
@@ -22,9 +28,12 @@
     <div class="battle-options">
         <p> Action points: {{ current_player.action_points }}</p>
         <form action="{{ url_for('hotseat_fight') }}" method="post">
-            <input type="submit" name="action" value="attack">
-            <input type="submit" name="action" value="heal">
-            <input type="submit" name="action" value="pass">
+            <button type="submit" name="action" value="attack">Attack(-4)</button>
+            <button type="submit" name="action" value="heal">Use health potion(-1)</button>
+            <button type="submit" name="action" value="attack_potion">Use attack potion(-1)</button>
+            <button type="submit" name="action" value="pass">Pass</button>
         </form>
+        <p> Your heal potions: {{ current_player.health_potions }}</p>
+        <p>Your attack potions: {{ current_player.attack_potions }}</p>
     </div>
 {% endblock %}
