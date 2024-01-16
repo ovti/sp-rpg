@@ -7,9 +7,6 @@
             <div class="player1-form">
 
                 <p>Wybierz statystykę do rozwoju dla : {{ player1.name }}</p>
-                {#            <input type="radio" name="player1_stat" value="health">HP<br>#}
-                {#            <input type="radio" name="player1_stat" value="attack">Atak<br>#}
-                {#            change to select#}
                 <select name="player1_stat" required>
                     <option value="health">HP</option>
                     <option value="attack">Atak</option>
@@ -18,15 +15,12 @@
             <div class="player2-form">
 
                 <p>Wybierz statystykę do rozwoju dla : {{ player2.name }}</p>
-                {#            <input type="radio" name="player2_stat" value="health">HP<br>#}
-                {#            <input type="radio" name="player2_stat" value="attack">Atak<br>#}
                 <select name="player2_stat" required>
                     <option value="health">HP</option>
                     <option value="attack">Atak</option>
                 </select>
 
             </div>
-            {#            <input type="submit" value="Dalej">#}
             <button type="submit">Dalej</button>
         </form>
         <h1>Item shop</h1>
