@@ -26,21 +26,27 @@
     <div class="battle-options">
         <h3> Action points: {{ current_player.action_points }} ⚔️</h3>
         <form action="{{ url_for('hotseat_fight') }}" method="post">
-            <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>
-            <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-2)</button>
-            {% if current_player.character == 'Priest' %}
-                <button type="submit" name="action" value="priest_heal">🍷 Heal (-2)</button>
-            {% endif %}
-            {% if current_player.health_potions > 0 %}
-                <button type="submit" name="action" value="heal">🍷 Use health potion (-1)</button>
-            {% endif %}
-            {% if current_player.attack_potions > 0 %}
-                <button type="submit" name="action" value="attack_potion">💪 Use attack potion (-1)</button>
-            {% endif %}
-            {% if current_player.mysterious_potions > 0 %}
-                <button type="submit" name="action" value="mysterious_potion">❓ Use mysterious potion (-1)</button>
-            {% endif %}
-            <button type="submit" name="action" value="pass">⏭️ Pass</button>
+            <div class="battle-options-skills">
+                <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>
+                <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-2)</button>
+                {% if current_player.character == 'Priest' %}
+                    <button type="submit" name="action" value="priest_heal">🍷 Heal (-2)</button>
+                {% endif %}
+            </div>
+            <div class="battle-options-consumables">
+                {% if current_player.health_potions > 0 %}
+                    <button type="submit" name="action" value="heal">🍷 Use health potion (-1)</button>
+                {% endif %}
+                {% if current_player.attack_potions > 0 %}
+                    <button type="submit" name="action" value="attack_potion">💪 Use attack potion (-1)</button>
+                {% endif %}
+                {% if current_player.mysterious_potions > 0 %}
+                    <button type="submit" name="action" value="mysterious_potion">❓ Use mysterious potion (-1)</button>
+                {% endif %}
+            </div>
+            <div class="battle-options-pass">
+                <button type="submit" name="action" value="pass">⏭️ Pass</button>
+            </div>
         </form>
         <p>Your heal potions: {{ current_player.health_potions }} 🍷</p>
         <p>Your attack potions: {{ current_player.attack_potions }} 💪</p>

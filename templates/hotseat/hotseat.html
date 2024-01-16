@@ -1,6 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <h1>Create characters:</h1>
+    <h2><a href="{{ url_for('guide') }}" target="_blank">Guide</a></h2>
     <div class="character-create-form">
         <form action="{{ url_for('hotseat_start') }}" method="post">
             <h2>Player 1:</h2>
@@ -9,6 +10,7 @@
             <br>
             <br>
             <label for="character1">Pick your class:</label>
+
             <div class="character-frames">
                 <div class="fighter-frame">
                     <input type="radio" name="character1" id="fighter1" value="fighter" checked>

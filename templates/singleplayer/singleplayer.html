@@ -8,8 +8,10 @@
             <br>
             <br>
             <label for="character">Pick your class:</label>
+            <br>
+            <br>
+            <h2><a href="{{ url_for('guide') }}" target="_blank">Guide</a></h2>
             <div class="character-frames">
-
                 <div class="fighter-frame">
                     <input type="radio" name="character" id="fighter" value="fighter" checked>
                     <label for="fighter">
@@ -41,7 +43,7 @@
             </div>
 
             {#            <input type="submit" value="Stwórz">#}
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit">Create</button>
         </form>
     </div>
 {% endblock %}

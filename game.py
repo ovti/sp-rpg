@@ -85,8 +85,15 @@ class Game:
                 self.heal(enemy)
                 flash('{} used a health potion'.format(enemy.name))
             else:
-                self.enemy_attack(enemy, player)
-                flash('{} attacked player {} for {} damage'.format(enemy.name, player.name, enemy.attack))
+                if player.character == 'Fighter':
+                    if random.randint(1, 10) >= 8:
+                        flash('{} blocked the attack'.format(player.name))
+                    else:
+                        self.enemy_attack(enemy, player)
+                        flash('{} attacked player {} for {} damage'.format(enemy.name, player.name, enemy.attack))
+                else:
+                    self.enemy_attack(enemy, player)
+                    flash('{} attacked player {} for {} damage'.format(enemy.name, player.name, enemy.attack))
 
     def heal(self, character):
         # mage can use it without action points
@@ -150,7 +157,7 @@ class Game:
         if player.action_points >= 4:
             player.action_points -= 4
             if player.character == 'Thief':
-                if random.randint(1, 10) > 7:
+                if random.randint(1, 10) >= 7:
                     return player.attack * 2
                 else:
                     return player.attack
@@ -158,14 +165,15 @@ class Game:
                 return player.attack
 
     def quick_attack(self, player):
-        if player.action_points >= 2 and random.randint(1, 10) > 4:
-            player.action_points -= 2
-            return player.attack / 2
-        else:
-            player.action_points -= 2
-            player.health -= 5
-            flash('Quick attack failed and enemy hit back for 5 damage')
-            return None
+        if player.action_points >= 2:
+            if random.randint(1, 10) > 4:
+                player.action_points -= 2
+                return player.attack / 2
+            else:
+                player.action_points -= 2
+                player.health -= 5
+                flash('Quick attack failed and enemy hit back for 5 damage')
+                return None
 
     def fight(self, player, action, enemy, is_not_solo=False, is_pvp=False):
         if player.is_alive() and enemy.is_alive() and not is_pvp:
@@ -199,7 +207,12 @@ class Game:
                 damage_dealt = self.perform_player_move(player, action)
                 if damage_dealt is not None:
                     flash('{} attacked {} for {} damage'.format(player.name, enemy.name, damage_dealt))
-                    enemy.take_damage(damage_dealt)
+                    if enemy.character == 'Fighter':
+                        if random.randint(1, 10) >= 8:
+                            flash('{} blocked the attack'.format(enemy.name))
+                        else:
+                            enemy.take_damage(damage_dealt)
+                            flash('{} took {} damage'.format(enemy.name, damage_dealt))
 
             if player.action_points <= 0:
                 player.action_points = 5

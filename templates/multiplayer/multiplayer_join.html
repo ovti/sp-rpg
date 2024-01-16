@@ -10,6 +10,9 @@
             <br>
             <br>
             <label for="character">Pick your class: </label>
+            <br>
+            <br>
+            <h2><a href="{{ url_for('guide') }}" target="_blank">Guide</a></h2>
             <div class="character-frames">
 
                 <div class="fighter-frame">
@@ -47,7 +50,7 @@
             <input type="hidden" name="game_id" value="{{ game_id }}">
 
             {#            <input type="submit" value="Stwórz">#}
-            <button type="submit" class="btn btn-primary">Create</button>
+            <button type="submit">Join</button>
         </form>
     </div>
 {% endblock %}

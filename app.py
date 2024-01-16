@@ -464,5 +464,10 @@ def game_over(result):
         return redirect(url_for('index'))
 
 
+@app.route('/guide')
+def guide():
+    return render_template('guide.html')
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=12122, debug=True)

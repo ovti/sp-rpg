@@ -1,6 +1,6 @@
 {% extends 'base.html' %}
 {% block head %}
-    <meta http-equiv="refresh" content="1">
+    <meta http-equiv="refresh" content="3">
 {% endblock %}
 {% block content %}
     <div class="battle-window">
@@ -27,42 +27,56 @@
         {% if current_player == player1 and session['player1'] == 'player1' %}
             <h3> Action points: {{ player1.action_points }}</h3>
             <form action="{{ url_for('multiplayer_attack') }}" method="post">
-                <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>
-                <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-2)</button>
-                {% if player1.character == 'Priest' %}
-                    <button type="submit" name="action" value="priest_heal">🍷 Heal (-2)</button>
-                {% endif %}
-                {% if player1.health_potions > 0 %}
-                    <button type="submit" name="action" value="heal">🍷 Use health potion (-1)</button>
-                {% endif %}
-                {% if player1.attack_potions > 0 %}
-                    <button type="submit" name="action" value="attack_potion">💪 Use attack potion (-1)</button>
-                {% endif %}
-                {% if player1.mysterious_potions > 0 %}
-                    <button type="submit" name="action" value="mysterious_potion">❓ Use mysterious potion (-1)</button>
-                {% endif %}
-                <button type="submit" name="action" value="pass">⏭️ Pass</button>
+                <div class="battle-options-skills">
+                    <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>
+                    <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-2)</button>
+                    {% if player1.character == 'Priest' %}
+                        <button type="submit" name="action" value="priest_heal">🍷 Heal (-2)</button>
+                    {% endif %}
+                </div>
+                <div class="battle-options-consumables">
+                    {% if player1.health_potions > 0 %}
+                        <button type="submit" name="action" value="heal">🍷 Use health potion (-1)</button>
+                    {% endif %}
+                    {% if player1.attack_potions > 0 %}
+                        <button type="submit" name="action" value="attack_potion">💪 Use attack potion (-1)</button>
+                    {% endif %}
+                    {% if player1.mysterious_potions > 0 %}
+                        <button type="submit" name="action" value="mysterious_potion">❓ Use mysterious potion (-1)
+                        </button>
+                    {% endif %}
+                </div>
+                <div class="battle-options-pass">
+                    <button type="submit" name="action" value="pass">⏭️ Pass</button>
+                </div>
             </form>
             <p>Your heal potions: {{ player1.health_potions }} 🍷</p>
             <p>Your attack potions: {{ player1.attack_potions }} 💪</p>
         {% elif current_player == player2 and session['player2'] == 'player2' %}
             <h3> Action points: {{ player2.action_points }}</h3>
             <form action="{{ url_for('multiplayer_attack') }}" method="post">
-                <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>
-                <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-2)</button>
-                {% if player2.character == 'Priest' %}
-                    <button type="submit" name="action" value="priest_heal">🍷 Heal (-2)</button>
-                {% endif %}
-                {% if player2.health_potions > 0 %}
-                    <button type="submit" name="action" value="heal">🍷 Use health potion (-1)</button>
-                {% endif %}
-                {% if player2.attack_potions > 0 %}
-                    <button type="submit" name="action" value="attack_potion">💪 Use attack potion (-1)</button>
-                {% endif %}
-                {% if player2.mysterious_potions > 0 %}
-                    <button type="submit" name="action" value="mysterious_potion">❓ Use mysterious potion (-1)</button>
-                {% endif %}
-                <button type="submit" name="action" value="pass">⏭️ Pass</button>
+                <div class="battle-options-skills">
+                    <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>
+                    <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-2)</button>
+                    {% if player2.character == 'Priest' %}
+                        <button type="submit" name="action" value="priest_heal">🍷 Heal (-2)</button>
+                    {% endif %}
+                </div>
+                <div class="battle-options-consumables">
+                    {% if player2.health_potions > 0 %}
+                        <button type="submit" name="action" value="heal">🍷 Use health potion (-1)</button>
+                    {% endif %}
+                    {% if player2.attack_potions > 0 %}
+                        <button type="submit" name="action" value="attack_potion">💪 Use attack potion (-1)</button>
+                    {% endif %}
+                    {% if player2.mysterious_potions > 0 %}
+                        <button type="submit" name="action" value="mysterious_potion">❓ Use mysterious potion (-1)
+                        </button>
+                    {% endif %}
+                </div>
+                <div class="battle-options-pass">
+                    <button type="submit" name="action" value="pass">⏭️ Pass</button>
+                </div>
             </form>
             <p>Your heal potions: {{ player2.health_potions }} 🍷</p>
             <p>Your attack potions: {{ player2.attack_potions }} 💪</p>

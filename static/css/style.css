@@ -41,6 +41,15 @@ a:hover {
     color: #ffd700;
 }
 
+.class-guide {
+    margin-bottom: 30px;
+}
+
+.class-guide p {
+    margin: 10px 0;
+    line-height: 1.5;
+}
+
 .main {
     display: flex;
     justify-content: center;
@@ -266,9 +275,10 @@ a:hover {
 .battle-options form {
     display: flex;
     justify-content: center;
-    flex-direction: row;
-    margin: 1rem;
+    align-items: center;
+    flex-direction: column;
 }
+
 
 .battle-options button[type="submit"] {
     margin: 0.5rem;
@@ -287,6 +297,7 @@ a:hover {
     background-color: rgba(255, 255, 255, 0.18);
     color: #ffd700;
 }
+
 
 .between-levels-forms {
     display: flex;
