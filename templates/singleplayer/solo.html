@@ -24,7 +24,7 @@
     </div>
 
     <div class="battle-options">
-        <h3> Action points: {{ player.action_points }}</h3>
+        <h2> Action points: {{ player.action_points }}</h2>
         <form action="{{ url_for('fight') }}" method="post">
             <div class="battle-options-skills">
                 <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>

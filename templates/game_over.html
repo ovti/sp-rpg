@@ -2,9 +2,14 @@
 
 {% block content %}
     {% if result  == 'win' %}
-        Congratulations, you won!
+        <h1> Congratulations, you won! </h1>
+        <img src="{{ url_for('static', filename='img/assets/butters-south.gif') }}" alt="Happy Butters">
+
     {% else %}
-        Sorry, you lost.
+        <h1>You lost.</h1>
+        <div class="main-content-img">
+            <img src="{{ url_for('static', filename='img/assets/crying-eric-cartman.gif') }}" alt="Crying Eric Cartman">
+        </div>
     {% endif %}
-    <a href="{{ url_for('index') }}">Play again</a>
+    <h2><a href="{{ url_for('index') }}">Play again</a></h2>
 {% endblock %}

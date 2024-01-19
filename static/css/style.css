@@ -530,3 +530,11 @@ a:hover {
     margin: 1rem;
 }
 
+.continue-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    font-size: 1.5rem;
+}

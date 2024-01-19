@@ -25,7 +25,7 @@
     <div class="battle-options">
 
         {% if current_player == player1 and session['player1'] == 'player1' %}
-            <h3> Action points: {{ player1.action_points }}</h3>
+            <h2> Action points: {{ player1.action_points }}</h2>
             <form action="{{ url_for('multiplayer_attack') }}" method="post">
                 <div class="battle-options-skills">
                     <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>
@@ -53,7 +53,7 @@
             <p>Your heal potions: {{ player1.health_potions }} 🍷</p>
             <p>Your attack potions: {{ player1.attack_potions }} 💪</p>
         {% elif current_player == player2 and session['player2'] == 'player2' %}
-            <h3> Action points: {{ player2.action_points }}</h3>
+            <h2> Action points: {{ player2.action_points }}</h2>
             <form action="{{ url_for('multiplayer_attack') }}" method="post">
                 <div class="battle-options-skills">
                     <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>

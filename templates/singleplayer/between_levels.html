@@ -1,7 +1,7 @@
 {% extends 'base.html' %}
 {% block content %}
     <div class="between-levels-forms">
-        <h1>You won! Choose stat to upgrade</h1>
+        <h1>You won! Choose a stat to level up.</h1>
         <form action="{{ url_for('between_levels') }}" method="post" class="levels-form">
 
             <select name="stat" required>
@@ -9,7 +9,7 @@
                 <option value="attack">Attack</option>
             </select>
 
-            <button type="submit">Next</button>
+            <button type="submit" class="continue-button">Continue</button>
         </form>
 
         <h1>Item shop</h1>

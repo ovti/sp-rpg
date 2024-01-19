@@ -2,26 +2,27 @@
 {% block content %}
     <div class="between-levels-forms">
 
-        <h1>Ukończono poziom! Wybierz statystykę do rozwoju. </h1>
+        <h1>You won! Choose a stat to level up. </h1>
         <form action="{{ url_for('between_levels_hotseat') }}" method="post" class="levels-form">
             <div class="player1-form">
 
-                <p>Wybierz statystykę do rozwoju dla : {{ player1.name }}</p>
+                <p>Stats for: {{ player1.name }}</p>
                 <select name="player1_stat" required>
                     <option value="health">HP</option>
-                    <option value="attack">Atak</option>
+                    <option value="attack">Attack</option>
                 </select>
             </div>
             <div class="player2-form">
 
-                <p>Wybierz statystykę do rozwoju dla : {{ player2.name }}</p>
+                <p>Stats for: {{ player2.name }}</p>
                 <select name="player2_stat" required>
                     <option value="health">HP</option>
-                    <option value="attack">Atak</option>
+                    <option value="attack">Attack</option>
                 </select>
 
             </div>
-            <button type="submit">Dalej</button>
+
+            <button type="submit" class="continue-button">Continue</button>
         </form>
         <h1>Item shop</h1>
         <p>Items for: {{ player1.name }}</p>
