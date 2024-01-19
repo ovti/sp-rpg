@@ -4,7 +4,7 @@
     <div class="character-create-form">
         <form action="{{ url_for('singleplayer_start') }}" method="post">
             <label for="name">Name:</label>
-            <input type="text" name="name" id="name" required>
+            <input type="text" name="name" id="name" maxlength="12" required>
             <br>
             <br>
             <label for="character">Pick your class:</label>
