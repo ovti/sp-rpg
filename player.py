@@ -10,6 +10,7 @@ class Player:
         self.attack_potions = attack_potions
         self.action_points = action_points
         self.mysterious_potions = mysterious_potions
+        self.max_health = health
 
     def take_damage(self, damage):
         self.health -= damage

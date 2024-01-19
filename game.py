@@ -7,19 +7,19 @@ class Game:
     def __init__(self):
 
         self.enemies = {
-            'kid1': Player('Kid1', 'Enemy', 10, 5),
-            'scott': Player('Scott', 'Enemy', 20, 6, 0, 1, 1),
+            'kid1': Player('Kid1', 'Enemy', 10, 5, 0, 1, 1),
+            'scott': Player('Scott', 'Enemy', 20, 6, 0, 2, 1),
             'kid2': Player('Kid2', 'Enemy', 30, 8, 0, 0, 1),
             'tweek': Player('Tweek', 'Enemy', 40, 10, 0, 1, 0),
             'kid3': Player('Kid3', 'Enemy', 50, 12, 0, 2, 1),
             'clyde': Player('Clyde', 'Enemy', 60, 14, 0, 1, 2),
             'kid4': Player('Kid4', 'Enemy', 70, 16, 0, 2, 2),
             'craig': Player('Craig', 'Enemy', 80, 18, 0, 2, 2),
-            'butters': Player('Butters', 'Enemy', 30, 8),
-            'token': Player('Token', 'Enemy', 60, 12),
-            'stan': Player('Stan', 'Enemy', 70, 12),
-            'kyle': Player('Kyle', 'Enemy', 150, 20),
-            'cartman': Player('Cartman', 'Enemy', 200, 25, 0, 3, 0),
+            'butters': Player('Butters', 'Enemy', 30, 8, 0, 1, 1),
+            'token': Player('Token', 'Enemy', 60, 12, 0, 1, 1),
+            'stan': Player('Stan', 'Enemy', 70, 12, 0, 1, 1),
+            'kyle': Player('Kyle', 'Enemy', 150, 20, 0, 2, 2),
+            'cartman': Player('Cartman', 'Enemy', 200, 25, 0, 3, 3),
         }
 
         self.levels = {
@@ -44,14 +44,6 @@ class Game:
         self.player2 = None
         self.is_not_solo = False
         self.game_score = 0
-
-        self.combat_log = []
-
-    def add_to_combat_log(self, message):
-        self.combat_log.append(message)
-
-    def get_combat_log(self):
-        return self.combat_log
 
     def create_player(self, name, character):
         if character == 'fighter':
@@ -95,8 +87,13 @@ class Game:
                     self.enemy_attack(enemy, player)
                     flash('{} attacked player {} for {} damage'.format(enemy.name, player.name, enemy.attack))
 
+    def check_enemy_enrage(self, enemy):
+        if enemy.health <= enemy.max_health * 0.3:
+            if random.randint(1, 10) >= 8:
+                enemy.attack *= 1.5
+                flash('{} enraged and increased its attack by 50%'.format(enemy.name))
+
     def heal(self, character):
-        # mage can use it without action points
         if character.character == 'Mage':
             if character.health_potions > 0:
                 character.health += 10
@@ -179,6 +176,7 @@ class Game:
         if player.is_alive() and enemy.is_alive() and not is_pvp:
             if action == 'pass':
                 flash('{} passed the turn'.format(player.name))
+                self.check_enemy_enrage(enemy)
                 self.enemy_move(enemy, player)
                 player.action_points = 5
                 if is_not_solo:
@@ -191,6 +189,7 @@ class Game:
                     enemy.take_damage(damage_dealt)
 
             if player.action_points <= 0:
+                self.check_enemy_enrage(enemy)
                 self.enemy_move(enemy, player)
                 player.action_points = 5
                 if is_not_solo:
