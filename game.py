@@ -193,7 +193,6 @@ class Game:
                 if is_not_solo:
                     self.switch_player()
 
-
         elif player.is_alive() and enemy.is_alive() and is_pvp:
             if action == 'pass':
                 flash('{} passed the turn'.format(player.name))
@@ -210,6 +209,9 @@ class Game:
                         else:
                             enemy.take_damage(damage_dealt)
                             flash('{} took {} damage'.format(enemy.name, damage_dealt))
+                    else:
+                        enemy.take_damage(damage_dealt)
+                        flash('{} took {} damage'.format(enemy.name, damage_dealt))
 
             if player.action_points <= 0:
                 player.action_points = 5
