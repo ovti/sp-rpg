@@ -165,7 +165,7 @@ class Game:
                 player.action_points -= 1
                 return player.attack / 2
             else:
-                player.action_points -= 2
+                player.action_points -= 1
                 player.health -= 5
                 flash('Quick attack failed and enemy hit back for 5 damage')
                 return None
