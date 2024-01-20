@@ -7,7 +7,7 @@ class Game:
     def __init__(self):
 
         self.enemies = {
-            'kid1': Player('Kid1', 'Enemy', 10, 5, 0, 1, 1),
+            'kid1': Player('Kid1', 'Enemy', 15, 5, 0, 1, 1),
             'scott': Player('Scott', 'Enemy', 20, 6, 0, 2, 1),
             'kid2': Player('Kid2', 'Enemy', 30, 8, 0, 0, 1),
             'tweek': Player('Tweek', 'Enemy', 40, 10, 0, 1, 0),
@@ -72,10 +72,8 @@ class Game:
         if enemy.is_alive():
             if enemy.health < 25 and enemy.attack_potions > 0:
                 self.attack_potion(enemy)
-                flash('{} used an attack potion'.format(enemy.name))
             if enemy.health < 15 and enemy.health_potions > 0:
                 self.heal(enemy)
-                flash('{} used a health potion'.format(enemy.name))
             else:
                 if player.character == 'Fighter':
                     if random.randint(1, 10) >= 8:
