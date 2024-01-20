@@ -90,6 +90,41 @@ a:hover {
     margin: 1rem;
 }
 
+.gamelog-flash {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    background-color: rgba(255, 90, 232, 0.7);
+    backdrop-filter: blur(5px);
+    -webkit-backdrop-filter: blur(5px);
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.18);
+    color: #fff;
+    text-align: center;
+    font-weight: bold;
+}
+
+.gamelog-flash ul {
+    list-style: none;
+    margin: 1rem;
+}
+
+.gamelog-flash ul li {
+    list-style: none;
+    margin: 1rem;
+}
+
+.continue-button {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+    margin: 1rem;
+    font-size: 1.5rem;
+}
+
 .character-create-form {
     display: flex;
     justify-content: center;
@@ -114,7 +149,6 @@ a:hover {
     color: #ffd700;
 }
 
-/*for radio*/
 .character-create-form input[type="radio"] {
     visibility: hidden;
 }
@@ -176,10 +210,16 @@ a:hover {
     color: #fff;
 }
 
-
 .character-create-form img {
     width: auto;
     height: 150px;
+}
+
+.character-frames {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: row;
 }
 
 .fighter-frame, .thief-frame, .mage-frame, .priest-frame {
@@ -190,13 +230,6 @@ a:hover {
     margin: 1rem;
 }
 
-.character-frames {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-}
-
 .lobby {
     display: flex;
     justify-content: center;
@@ -205,16 +238,15 @@ a:hover {
     margin: 1rem;
 }
 
-.lobby h1 {
+.lobby h1, .lobby p {
     font-size: 2rem;
     font-weight: 700;
     margin-bottom: 1rem;
 }
 
-.lobby p {
-    font-size: 1.5rem;
-    font-weight: 700;
-    margin-bottom: 1rem;
+.lobby ul {
+    list-style: none;
+    margin: 1rem;
 }
 
 .join-room {
@@ -279,7 +311,6 @@ a:hover {
     flex-direction: column;
 }
 
-
 .battle-options button[type="submit"] {
     margin: 0.5rem;
     padding: 0.5rem;
@@ -297,7 +328,6 @@ a:hover {
     background-color: rgba(255, 255, 255, 0.18);
     color: #ffd700;
 }
-
 
 .between-levels-forms {
     display: flex;
@@ -336,8 +366,6 @@ a:hover {
     background-color: rgba(255, 255, 255, 0.18);
     color: #ffd700;
 }
-
-/*for radio type*/
 
 .between-levels-forms input[type="radio"] {
     margin: 0.5rem;
@@ -398,17 +426,6 @@ a:hover {
     cursor: pointer;
 }
 
-/*.battle-window {*/
-/*    background: url("../img/assets/arena.png") no-repeat center center fixed;*/
-
-/*}*/
-
-/*.battle-window img {*/
-/*    background-size: cover;*/
-/*    background-position: center center; !* Center the image *!*/
-/*    background-repeat: no-repeat;*/
-/*}*/
-
 .battle-window {
     display: flex;
     justify-content: center;
@@ -430,7 +447,6 @@ a:hover {
     flex-direction: column;
     margin: 1rem;
     animation: moveAroundRight 3s infinite alternate;
-
 }
 
 .battle-enemy {
@@ -440,7 +456,6 @@ a:hover {
     flex-direction: column;
     margin: 1rem;
     animation: moveAroundLeft 3s infinite alternate;
-
 }
 
 .battle-player-mp {
@@ -503,38 +518,3 @@ a:hover {
     }
 }
 
-.gamelog-flash {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 1rem;
-    background-color: rgba(255, 90, 232, 0.7);
-    backdrop-filter: blur(5px);
-    -webkit-backdrop-filter: blur(5px);
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.18);
-
-    color: #fff;
-    text-align: center;
-    font-weight: bold;
-}
-
-.gamelog-flash ul {
-    list-style: none;
-    margin: 1rem;
-}
-
-.gamelog-flash ul li {
-    list-style: none;
-    margin: 1rem;
-}
-
-.continue-button {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    margin: 1rem;
-    font-size: 1.5rem;
-}

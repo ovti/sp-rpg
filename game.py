@@ -160,9 +160,9 @@ class Game:
                 return player.attack
 
     def quick_attack(self, player):
-        if player.action_points >= 2:
+        if player.action_points >= 1:
             if random.randint(1, 10) > 4:
-                player.action_points -= 2
+                player.action_points -= 1
                 return player.attack / 2
             else:
                 player.action_points -= 2

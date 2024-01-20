@@ -29,7 +29,7 @@
             <form action="{{ url_for('multiplayer_attack') }}" method="post">
                 <div class="battle-options-skills">
                     <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>
-                    <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-2)</button>
+                    <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-1)</button>
                     {% if player1.character == 'Priest' %}
                         <button type="submit" name="action" value="priest_heal">🍷 Heal (-2)</button>
                     {% endif %}
@@ -57,7 +57,7 @@
             <form action="{{ url_for('multiplayer_attack') }}" method="post">
                 <div class="battle-options-skills">
                     <button type="submit" name="action" value="attack">⚔️ Attack (-4)</button>
-                    <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-2)</button>
+                    <button type="submit" name="action" value="quick_attack">⚔️ Quick attack (-1)</button>
                     {% if player2.character == 'Priest' %}
                         <button type="submit" name="action" value="priest_heal">🍷 Heal (-2)</button>
                     {% endif %}
