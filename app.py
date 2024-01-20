@@ -157,7 +157,6 @@ def hotseat_start():
             game.player2 = game.create_player(name2, character2)
             game.current_player = game.player1
             enemy, level = game.get_info()
-            enemy.boost_stats()
             return render_template('hotseat/hot.html', player1=game.player1, player2=game.player2, enemy=enemy,
                                    level=level, current_player=game.current_player)
         else:

@@ -7,18 +7,18 @@ class Game:
     def __init__(self):
 
         self.enemies = {
-            'kid1': Player('Kid1', 'Enemy', 15, 5, 0, 1, 1),
-            'scott': Player('Scott', 'Enemy', 20, 6, 0, 2, 1),
-            'kid2': Player('Kid2', 'Enemy', 30, 8, 0, 0, 1),
-            'tweek': Player('Tweek', 'Enemy', 40, 10, 0, 1, 0),
-            'kid3': Player('Kid3', 'Enemy', 50, 12, 0, 2, 1),
-            'clyde': Player('Clyde', 'Enemy', 60, 14, 0, 1, 2),
-            'kid4': Player('Kid4', 'Enemy', 70, 16, 0, 2, 2),
-            'craig': Player('Craig', 'Enemy', 80, 18, 0, 2, 2),
-            'butters': Player('Butters', 'Enemy', 30, 8, 0, 1, 1),
-            'token': Player('Token', 'Enemy', 60, 12, 0, 1, 1),
-            'stan': Player('Stan', 'Enemy', 70, 12, 0, 1, 1),
-            'kyle': Player('Kyle', 'Enemy', 150, 20, 0, 2, 2),
+            'kid1': Player('Kid1', 'Enemy', 25, 5, 0, 1, 1),
+            'scott': Player('Scott', 'Enemy', 30, 6, 0, 2, 1),
+            'kid2': Player('Kid2', 'Enemy', 40, 8, 0, 0, 1),
+            'tweek': Player('Tweek', 'Enemy', 50, 10, 0, 1, 0),
+            'kid3': Player('Kid3', 'Enemy', 60, 12, 0, 2, 1),
+            'clyde': Player('Clyde', 'Enemy', 70, 14, 0, 1, 2),
+            'kid4': Player('Kid4', 'Enemy', 80, 16, 0, 2, 2),
+            'craig': Player('Craig', 'Enemy', 90, 18, 0, 2, 2),
+            'butters': Player('Butters', 'Enemy', 50, 12, 0, 1, 1),
+            'token': Player('Token', 'Enemy', 90, 12, 0, 1, 1),
+            'stan': Player('Stan', 'Enemy', 110, 12, 0, 1, 1),
+            'kyle': Player('Kyle', 'Enemy', 130, 20, 0, 2, 2),
             'cartman': Player('Cartman', 'Enemy', 200, 25, 0, 3, 3),
         }
 
@@ -47,17 +47,17 @@ class Game:
 
     def create_player(self, name, character):
         if character == 'fighter':
-            return Player(name, 'Fighter', 100, 10, 15, 6, 3)
+            return Player(name, 'Fighter', 100, 10, 15, 1, 1)
         elif character == 'mage':
             return Player(name, 'Mage', 80, 15, 5, 1, 1)
         elif character == 'thief':
-            return Player(name, 'Thief', 90, 12, 25, 1, 2)
+            return Player(name, 'Thief', 90, 12, 25, 1, 0)
         elif character == 'priest':
-            return Player(name, 'Priest', 60, 12, 15, 3, 1)
+            return Player(name, 'Priest', 60, 12, 15, 0, 2)
 
     def get_info(self):
         enemy = self.enemies.get(self.levels[self.current_level]['enemy'])
-        if not self.is_not_solo:
+        if self.player1 and self.player2:
             enemy.boost_stats()
         return enemy, self.current_level
 
@@ -116,11 +116,11 @@ class Game:
             flash('{} used an attack potion'.format(character.name))
 
     def mysterious_potion(self, character):
-        if character.mysterious_potions > 0 and character.action_points > 0:
+        if character.mysterious_potions > 0 and character.action_points >= 5:
             character.health += 50
             character.attack += 50
             character.mysterious_potions -= 1
-            character.action_points -= 1
+            character.action_points -= 5
             flash('{} used a mysterious potion'.format(character.name))
 
     def priest_heal(self, character):
@@ -237,9 +237,9 @@ class Game:
         elif action == 'attack' and player.gold >= 15:
             player.attack_potions += 1
             player.gold -= 15
-        elif action == 'mysterious-potion' and player.gold >= 150:
+        elif action == 'mysterious-potion' and player.gold >= 250:
             player.mysterious_potions += 1
-            player.gold -= 150
+            player.gold -= 250
 
     def give_gold(self, player):
         player.gold += 20
