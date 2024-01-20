@@ -24,17 +24,22 @@
                 {% endblock %}
             </div>
 
-            <div class="gamelog-flash">
-                {% with messages = get_flashed_messages() %}
-                    {% if messages %}
-                        <ul class="flashes">
-                            {% for message in messages %}
-                                <li>{{ message }}</li>
-                            {% endfor %}
-                        </ul>
-                    {% endif %}
-                {% endwith %}
-            </div>
+            {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                    <div class="gamelog-flash">
+                        <div class="gamelog-title">
+                            <h3>Game Log</h3>
+                        </div>
+                        <div class="gamelog-messages">
+                            <ul class="flashes">
+                                {% for message in messages %}
+                                    <li>{{ message }}</li>
+                                {% endfor %}
+                            </ul>
+                        </div>
+                    </div>
+                {% endif %}
+            {% endwith %}
         </div>
     </div>
 {% endblock %}

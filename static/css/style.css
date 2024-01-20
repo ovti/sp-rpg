@@ -11,9 +11,15 @@ body {
     font-size: 16px;
     line-height: 1.5;
     color: #333;
-    background-color: #f4f4f4;
-    background: url("../img/backgrounds/bg.jpg") no-repeat center center fixed;
+    background: #f4f4f4 url("../img/backgrounds/bg.jpg") no-repeat fixed center center;
     background-size: cover;
+}
+
+.content {
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    margin: 1rem;
 }
 
 .site-header {
@@ -25,7 +31,6 @@ body {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     color: #fff;
     padding: 1rem;
-    margin: 1rem;
     text-align: center;
     width: 100%;
     max-width: 800px;
@@ -51,10 +56,11 @@ a:hover {
 }
 
 .main {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr 2fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
     margin: 1rem;
 }
 
@@ -67,11 +73,11 @@ a:hover {
     box-shadow: 0 8px 32px 0 rgba(31, 38, 135, 0.37);
     color: #fff;
     padding: 1rem;
-    margin: 1rem;
     text-align: center;
     width: 100%;
     max-width: 800px;
     margin: 0 auto;
+    grid-area: 1 / 2 / 2 / 3;
 }
 
 .main-content-text {
@@ -91,10 +97,11 @@ a:hover {
 }
 
 .gamelog-flash {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 4fr;
+    grid-column-gap: 5px;
+    grid-row-gap: 5px;
     margin: 1rem;
     background-color: rgba(255, 90, 232, 0.7);
     backdrop-filter: blur(5px);
@@ -104,6 +111,9 @@ a:hover {
     color: #fff;
     text-align: center;
     font-weight: bold;
+    grid-area: 1 / 3 / 2 / 4;
+    max-width: 400px;
+    max-height: 400px;
 }
 
 .gamelog-flash ul {
@@ -115,6 +125,21 @@ a:hover {
     list-style: none;
     margin: 1rem;
 }
+
+.gamelog-title {
+    grid-area: 1 / 1 / 2 / 2;
+    margin-bottom: 1rem;
+    font-size: 2rem;
+    font-weight: 700;
+}
+
+.gamelog-messages {
+    grid-area: 2 / 1 / 3 / 2;
+    margin-bottom: 1rem;
+    font-size: 1.5rem;
+    font-weight: 700;
+}
+
 
 .continue-button {
     display: flex;
@@ -433,8 +458,6 @@ a:hover {
     gap: 5rem;
     background: url("../img/assets/arena.png") no-repeat center center fixed;
     background-size: cover;
-    background-position: center center;
-    background-repeat: no-repeat;
     padding: 5rem;
     object-fit: cover;
     background-position: -15rem -15rem;
@@ -518,3 +541,66 @@ a:hover {
     }
 }
 
+@media (max-width: 768px) {
+    .battle-window {
+        background-position: 0 0;
+        padding: 0;
+        object-fit: cover;
+    }
+
+    .battle-player, .battle-enemy, .battle-player-mp, .battle-enemy-mp {
+        margin: 0;
+    }
+
+    .battle-player-mp, .battle-enemy-mp {
+        margin: 0;
+        animation: none;
+    }
+
+
+    .battle-player, .battle-enemy {
+        margin: 0;
+        animation: none;
+    }
+
+
+    .battle-player img, .battle-enemy img, .battle-player-mp img, .battle-enemy-mp img {
+        width: 100px;
+    }
+
+    .battle-player-mp img, .battle-enemy-mp img {
+        width: 100px;
+    }
+
+    .battle-player img, .battle-enemy img {
+        width: 100px;
+    }
+
+    .battle-player-mp img, .battle-enemy-mp img {
+        width: 100px;
+    }
+
+    .battle-player-mp img, .battle-enemy-mp img {
+        width: 100px;
+    }
+
+    .site-header {
+        margin-bottom: 1rem;
+    }
+
+    .gamelog-flash {
+        margin-bottom: 1rem;
+        font-size: 1.5rem;
+        font-weight: 700;
+    }
+
+    .gamelog-title {
+        grid-area: 1 / 1 / 2 / 2;
+        font-size: 1rem;
+    }
+
+    .gamelog-messages {
+        grid-area: 2 / 1 / 3 / 2;
+        font-size: 1rem;
+    }
+}
