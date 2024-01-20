@@ -112,7 +112,7 @@ a:hover {
     text-align: center;
     font-weight: bold;
     grid-area: 1 / 3 / 2 / 4;
-    max-width: 400px;
+    max-width: 600px;
     max-height: 400px;
 }
 
@@ -136,8 +136,6 @@ a:hover {
 .gamelog-messages {
     grid-area: 2 / 1 / 3 / 2;
     margin-bottom: 1rem;
-    font-size: 1.5rem;
-    font-weight: 700;
 }
 
 
